@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-labelledby="t" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="t">How one client's decision is made (SOP NAT-04)</title>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="34" font-size="16" font-weight="700" fill="#111827" text-anchor="middle">How one client's decision is made (SOP NAT-04)</text>
+
+  <!-- Step 1 -->
+  <rect x="60" y="60" width="780" height="52" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="86" r="14" fill="#334155"/>
+  <text x="90" y="91" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+  <text x="118" y="91" font-size="15" fill="#111827">Permanent-resident date: card scan, else I-485 notice</text>
+
+  <!-- Step 1 exit (else) -->
+  <path d="M840,86 L920,86" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="880" y="78" font-size="14" fill="#334155" text-anchor="middle">else</text>
+  <rect x="920" y="60" width="220" height="52" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="1030" y="91" font-size="15" fill="#111827" text-anchor="middle">REQUEST_EVIDENCE</text>
+
+  <!-- 1 to 2 -->
+  <path d="M450,112 L450,156" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Step 2 -->
+  <rect x="60" y="156" width="780" height="52" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="182" r="14" fill="#334155"/>
+  <text x="90" y="187" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+  <text x="118" y="187" font-size="15" fill="#111827">Trips: CBP FOIA &gt; carrier document &gt; client statement (a hotel receipt doesn't count)</text>
+
+  <!-- 2 to 3 -->
+  <path d="M450,208 L450,252" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Step 3 -->
+  <rect x="60" y="252" width="780" height="52" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="278" r="14" fill="#334155"/>
+  <text x="90" y="283" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="118" y="283" font-size="15" fill="#111827">Any unverified trip returning on or after 2021-03-02?</text>
+
+  <!-- Step 3 exit (Yes) -->
+  <path d="M840,278 L920,278" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="880" y="270" font-size="14" fill="#334155" text-anchor="middle">Yes</text>
+  <rect x="920" y="252" width="220" height="52" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="1030" y="283" font-size="15" fill="#111827" text-anchor="middle">REQUEST_EVIDENCE</text>
+
+  <!-- 3 to 4: No -->
+  <path d="M450,304 L450,348" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="460" y="331" font-size="14" fill="#334155">No</text>
+
+  <!-- Step 4 -->
+  <rect x="60" y="348" width="780" height="92" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="394" r="14" fill="#334155"/>
+  <text x="90" y="399" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">4</text>
+  <text x="118" y="379" font-size="15" fill="#111827"><tspan x="118">Breaks: over 6 months is a presumed break</tspan><tspan x="118" dy="20">(rebut with 2 document types covering the whole trip);</tspan><tspan x="118" dy="20">1 year or more always breaks</tspan></text>
+
+  <!-- 4 to 5 -->
+  <path d="M450,440 L450,484" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Step 5 -->
+  <rect x="60" y="484" width="780" height="92" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="530" r="14" fill="#334155"/>
+  <text x="90" y="535" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">5</text>
+  <text x="118" y="515" font-size="15" fill="#111827"><tspan x="118">Earliest date per basis: continuous residence (90-day early window; after a break,</tspan><tspan x="118" dy="20">4 years + 6 months, or 4 years + 1 day for a rebutted 1-year break),</tspan><tspan x="118" dy="20">913 / 548 days present, 3 months in the state, never while abroad, 3-year spouse rules</tspan></text>
+
+  <!-- 5 to 6 -->
+  <path d="M450,576 L450,620" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Step 6 -->
+  <rect x="60" y="620" width="780" height="52" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90" cy="646" r="14" fill="#334155"/>
+  <text x="90" y="651" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">6</text>
+  <text x="118" y="651" font-size="15" fill="#111827">Pick the earlier basis (tie → 5-year): FILE_NOW if it's the review date, else SCHEDULE</text>
+</svg>

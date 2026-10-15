@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" role="img" aria-labelledby="t" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="t">How the n400-filing-review task works</title>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">How the n400-filing-review task works</text>
+
+  <!-- containers -->
+  <rect x="850" y="54" width="326" height="586" rx="14" fill="#F7FDF9" stroke="#059669" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <rect x="402" y="270" width="302" height="282" rx="14" fill="#FFFDF7" stroke="#D97706" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+  <!-- column headers -->
+  <text x="184" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Build time</text>
+  <text x="553" y="296" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Agent container (sealed)</text>
+  <text x="1013" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Verifier container (separate)</text>
+
+  <!-- arrows -->
+  <path d="M184,164 L184,208" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M184,272 L184,316" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M184,420 L184,464" fill="none" stroke="#334155" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <path d="M344,368 L418,368" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M553,420 L553,464" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M688,496 L866,496" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M344,132 L866,132" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M1013,164 L1013,464" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M1013,528 L1013,572" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- arrow labels -->
+  <text x="553" y="122" text-anchor="middle" font-size="14" fill="#334155">baked into the verifier image</text>
+  <text x="777" y="467" text-anchor="middle" font-size="14" fill="#334155"><tspan x="777">Harbor copies</tspan><tspan x="777" dy="19">only this file</tspan></text>
+
+  <!-- build time -->
+  <rect x="24" y="100" width="320" height="64" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="184" y="127" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">tests/case_facts.json:</tspan><tspan x="184" dy="20">one source of truth (16 synthetic clients)</tspan></text>
+
+  <rect x="24" y="208" width="320" height="64" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="184" y="235" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">tools/render_case_data.py:</tspan><tspan x="184" dy="20">deterministic renderer</tspan></text>
+
+  <rect x="24" y="316" width="320" height="104" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="184" y="343" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">/app/review:</tspan><tspan x="184" dy="20">cms.sqlite (CMS export),</tspan><tspan x="184" dy="20">mail/ (7 emails, 2 with attachments),</tspan><tspan x="184" dy="20">sop/ (SOP NAT-04 + JSON schema)</tspan></text>
+
+  <!-- oracle -->
+  <rect x="24" y="464" width="320" height="108" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="184" y="490" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Oracle</text>
+  <text x="184" y="514" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">solution/solve.py reads only /app/review</tspan><tspan x="184" dy="20">and reproduces all 15 answers:</tspan><tspan x="184" dy="20">proves the records hold the facts</tspan></text>
+
+  <!-- agent container -->
+  <rect x="418" y="316" width="270" height="104" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="553" y="353" text-anchor="middle" font-size="15" fill="#111827"><tspan x="553">AI agent (Claude Code, Opus 5.5)</tspan><tspan x="553" dy="20">reads the records</tspan><tspan x="553" dy="20">and applies the SOP</tspan></text>
+
+  <rect x="418" y="464" width="270" height="64" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="553" y="491" text-anchor="middle" font-size="15" fill="#111827"><tspan x="553">/app/output/filing_review.json:</tspan><tspan x="553" dy="20">15 decisions</tspan></text>
+
+  <!-- verifier container -->
+  <rect x="866" y="100" width="294" height="64" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="1013" y="127" text-anchor="middle" font-size="15" fill="#111827"><tspan x="1013">tests/rules.py + its own copy of</tspan><tspan x="1013" dy="20">case_facts.json → expected decisions</tspan></text>
+
+  <rect x="866" y="464" width="294" height="64" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="1013" y="491" text-anchor="middle" font-size="15" fill="#111827"><tspan x="1013">tests/test_outputs.py:</tspan><tspan x="1013" dy="20">strict schema, exact match on all 15</tspan></text>
+
+  <rect x="866" y="572" width="294" height="44" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="1013" y="599" text-anchor="middle" font-size="15" fill="#111827">Reward 1 only if all 15 match, else 0</text>
+
+  <!-- guardrails -->
+  <text x="24" y="701" font-size="15" font-weight="700" fill="#111827">Guardrails</text>
+  <rect x="200" y="680" width="336" height="32" rx="16" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="368" y="701" text-anchor="middle" font-size="14" fill="#111827">Answer key never enters the agent container</text>
+  <rect x="636" y="680" width="240" height="32" rx="16" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="756" y="701" text-anchor="middle" font-size="14" fill="#111827">Agent code is never executed</text>
+  <rect x="976" y="680" width="200" height="32" rx="16" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="1076" y="701" text-anchor="middle" font-size="14" fill="#111827">/cheat run must score 0</text>
+</svg>

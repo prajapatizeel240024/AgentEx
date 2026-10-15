@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 768" width="1200" height="768" role="img" aria-labelledby="t" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="t">Production plan (proposed, not built)</title>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">Production plan (proposed, not built)</text>
+
+  <!-- main flow -->
+  <rect x="32" y="60" width="380" height="48" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="222" y="89" text-anchor="middle" font-size="15" fill="#111827">Inputs: CMS API, intake inbox, CBP FOIA PDFs</text>
+
+  <rect x="32" y="152" width="380" height="68" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="222" y="181" text-anchor="middle" font-size="15" fill="#111827"><tspan x="222">Model extracts facts, each with</tspan><tspan x="222" dy="20">a source quote and confidence</tspan></text>
+
+  <rect x="32" y="264" width="380" height="48" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="222" y="293" text-anchor="middle" font-size="15" fill="#111827">Rules engine (plain code) reads rules.yaml</text>
+
+  <polygon points="222,356 322,400 222,444 122,400" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="222" y="405" text-anchor="middle" font-size="15" fill="#111827">Checks pass?</text>
+
+  <rect x="32" y="488" width="380" height="48" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="222" y="517" text-anchor="middle" font-size="15" fill="#111827">Draft decision</text>
+
+  <rect x="32" y="580" width="380" height="68" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="222" y="609" text-anchor="middle" font-size="15" fill="#111827"><tspan x="222">Paralegal approves, edits or</tspan><tspan x="222" dy="20">overrides (reason logged)</tspan></text>
+
+  <rect x="32" y="692" width="380" height="48" rx="10" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="222" y="721" text-anchor="middle" font-size="15" fill="#111827">Client</text>
+
+  <!-- No branch -->
+  <rect x="482" y="356" width="260" height="88" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="612" y="385" text-anchor="middle" font-size="15" fill="#111827"><tspan x="612">Back to the model</tspan><tspan x="612" dy="20">with the exact errors</tspan><tspan x="612" dy="20">(max 3 attempts)</tspan></text>
+
+  <rect x="482" y="488" width="260" height="48" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="612" y="517" text-anchor="middle" font-size="15" fill="#111827">Paralegal queue</text>
+
+  <!-- Always on panel -->
+  <rect x="812" y="60" width="356" height="476" rx="14" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+  <text x="990" y="91" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Always on</text>
+
+  <rect x="832" y="112" width="316" height="68" rx="10" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="990" y="151" text-anchor="middle" font-size="15" fill="#111827">Append-only audit log</text>
+
+  <rect x="832" y="224" width="316" height="68" rx="10" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="990" y="253" text-anchor="middle" font-size="15" fill="#111827"><tspan x="990">Role-based masking of</tspan><tspan x="990" dy="20">A-numbers and addresses</tspan></text>
+
+  <rect x="832" y="336" width="316" height="68" rx="10" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="990" y="365" text-anchor="middle" font-size="15" fill="#111827"><tspan x="990">Eval suite in CI: these 15 clients</tspan><tspan x="990" dy="20">plus every real miss</tspan></text>
+
+  <rect x="832" y="448" width="316" height="68" rx="10" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="990" y="487" text-anchor="middle" font-size="15" fill="#111827">Extraction cache by document hash</text>
+
+  <!-- arrows -->
+  <path d="M222,108 L222,152" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M222,220 L222,264" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M222,312 L222,356" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M222,444 L222,488" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M222,536 L222,580" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M222,648 L222,692" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M322,400 L482,400" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M612,356 L612,186 L412,186" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M612,444 L612,488" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- arrow labels -->
+  <text x="232" y="468" font-size="14" fill="#334155">Yes</text>
+  <text x="338" y="392" font-size="14" fill="#334155">No</text>
+  <text x="622" y="468" font-size="14" fill="#334155">after 3</text>
+</svg>
