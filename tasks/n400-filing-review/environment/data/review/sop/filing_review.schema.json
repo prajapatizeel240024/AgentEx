@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "N-400 readiness review decisions (SOP NAT-04). This schema is normative.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["review_date", "decisions"],
+  "properties": {
+    "review_date": {
+      "description": "The review date of this cycle.",
+      "const": "2026-03-02"
+    },
+    "decisions": {
+      "description": "Exactly one entry for every client in review_queue, in any order, and no other clients.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["client_id", "status", "basis", "earliest_filing_date"],
+        "properties": {
+          "client_id": {
+            "description": "review_queue.client_id, for example C-1001.",
+            "type": "string",
+            "pattern": "^C-[0-9]{4}$"
+          },
+          "status": {
+            "enum": ["FILE_NOW", "SCHEDULE", "REQUEST_EVIDENCE"]
+          },
+          "basis": {
+            "description": "null when status is REQUEST_EVIDENCE.",
+            "enum": ["5_YEAR", "3_YEAR_MARRIAGE", null]
+          },
+          "earliest_filing_date": {
+            "description": "YYYY-MM-DD. Equal to review_date for FILE_NOW, later than review_date for SCHEDULE, null for REQUEST_EVIDENCE.",
+            "type": ["string", "null"],
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          }
+        }
+      }
+    }
+  }
+}

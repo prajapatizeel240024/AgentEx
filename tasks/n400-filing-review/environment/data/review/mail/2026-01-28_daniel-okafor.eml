@@ -1,0 +1,33 @@
+From: Daniel Okafor <daniel.okafor@example.com>
+To: intake@calder-voss.example
+Subject: Montreal bus ticket
+Date: Wed, 28 Jan 2026 11:40:00 -0500
+Message-ID: <2026-01-28_daniel-okafor@mail.calder-voss.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==2026-01-28_daniel-okafor=="
+
+--==2026-01-28_daniel-okafor==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Attached is my e-ticket for the August 2023 Montreal trip you asked about.
+
+Daniel
+
+--==2026-01-28_daniel-okafor==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment; filename="northstar_eticket.txt"
+MIME-Version: 1.0
+
+NORTHSTAR COACH LINES - E-TICKET
+Passenger: Daniel Okafor
+Booking: NS-48213
+Outbound: 2023-08-12 07:30 New York (Port Authority) -> Montreal (Gare d'auto=
+cars)
+Return: 2023-08-20 13:15 Montreal (Gare d'autocars) -> New York (Port Authori=
+ty)
+
+--==2026-01-28_daniel-okafor==--
