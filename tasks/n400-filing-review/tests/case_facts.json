@@ -1,0 +1,1426 @@
+{
+  "_note": "Ground truth for the verifier (goes in tests/ only, never in the agent image). Rendered into environment/data/review by tools/render_case_data.py.",
+  "review_date": "2026-03-02",
+  "cms_export_date": "2026-02-16",
+  "clients": [
+    {
+      "client_id": "C-1001",
+      "full_name": "Ana Ferreira",
+      "dob": "1988-04-12",
+      "a_number": "A217448901",
+      "email": "ana.ferreira@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2020-11-10",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2020-11-10",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "41-22 Ditmars Blvd, Apt 3R",
+          "city": "Astoria",
+          "state": "NY",
+          "moved_in": "2018-04-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01001",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2022-12-18",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-01-08",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-07-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-07-21",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1001-1",
+          "doc_type": "AIRLINE_ITINERARY",
+          "issuer": "Atlantic Crest Airways (JFK-GRU)",
+          "depart_date": "2024-07-01",
+          "return_date": "2024-07-21",
+          "covers_from": null,
+          "covers_to": null,
+          "received_on": "2025-11-12"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-12-18",
+          "return_date": "2023-01-08",
+          "destination": "Brazil",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2024-07-01",
+          "return_date": "2024-07-21",
+          "destination": "Brazil",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [
+        {
+          "depart_date": "2026-06-01",
+          "return_date": "2026-06-10",
+          "destination": "Portugal",
+          "recorded_on": "2026-02-03"
+        }
+      ],
+      "emails": [
+        {
+          "file": "2026-02-03_ana-ferreira.eml",
+          "date": "2026-02-03T09:14:00-05:00",
+          "from": "Ana Ferreira <ana.ferreira@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Ready to apply?",
+          "body": "Hi,\n\nI think I've been a resident long enough now. All my travel is in the questionnaire. Heads up that I'm going to Lisbon from June 1, 2026 to June 10, 2026 for a conference.\n\nThanks,\nAna\n",
+          "attachments": [],
+          "facts": {
+            "kind": "planned_trip",
+            "depart": "2026-06-01",
+            "return": "2026-06-10"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1002",
+      "full_name": "Mehmet Kaya",
+      "dob": "1990-09-03",
+      "a_number": "A209771354",
+      "email": "mehmet.kaya@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2021-06-15",
+          "note": "Resident Since, 10-year card issued after I-751 approval"
+        },
+        {
+          "source": "I797_NOTICE",
+          "form": "I-751",
+          "record_date": "2023-09-20",
+          "note": "I-751 approval notice"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2023-09-20",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "310 W 98th St, Apt 6B",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2020-03-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": {
+        "spouse_name": "Lauren Kaya",
+        "marriage_date": "2020-02-01",
+        "spouse_status": "USC_BY_BIRTH",
+        "spouse_naturalized_on": null,
+        "status": "MARRIED"
+      },
+      "cbp_foia": {
+        "request_no": "CBP-2026-01002",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-12-20",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-01-03",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-12-20",
+          "return_date": "2024-01-03",
+          "destination": "Turkey",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1003",
+      "full_name": "Priya Raman",
+      "dob": "1985-01-27",
+      "a_number": "A206115482",
+      "email": "priya.raman@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-04-01",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-04-01",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "88-15 Elmhurst Ave",
+          "city": "Elmhurst",
+          "state": "NY",
+          "moved_in": "2016-09-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01003",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-03-10",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-03-24",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-07-09",
+          "type": "ARRIVAL",
+          "port": "Champlain, NY",
+          "mode": "LAND"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-03-10",
+          "return_date": "2023-03-24",
+          "destination": "India",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-01-20_priya-raman.eml",
+          "date": "2026-01-20T19:02:00-05:00",
+          "from": "Priya Raman <priya.raman@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "One more trip",
+          "body": "Hi,\n\nI forgot to list one trip. We drove up to Montreal over the July 4th weekend in 2024. We left on July 4, 2024 and came back on July 9, 2024. I've attached the hotel receipt in case it helps.\n\nPriya\n",
+          "attachments": [
+            {
+              "filename": "hotel_receipt.txt",
+              "content_type": "text/plain",
+              "text": "HOTEL RUE SAINTE-CLAIRE - Montreal, QC\nGuest: Priya Raman\nCheck-in: 2024-07-04\nCheck-out: 2024-07-09\nRoom: Queen, 5 nights\nTotal: CAD 1,184.50\n"
+            }
+          ],
+          "facts": {
+            "kind": "trip_statement",
+            "depart": "2024-07-04",
+            "return": "2024-07-09"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1004",
+      "full_name": "Daniel Okafor",
+      "dob": "1983-06-30",
+      "a_number": "A204338719",
+      "email": "daniel.okafor@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2018-05-20",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2018-05-20",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "112 Mulberry St, Apt 2",
+          "city": "Newark",
+          "state": "NJ",
+          "moved_in": "2015-02-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01004",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-08-20",
+          "type": "ARRIVAL",
+          "port": "Champlain, NY",
+          "mode": "LAND"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-08-11",
+          "return_date": "2023-08-20",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-01-28_daniel-okafor.eml",
+          "date": "2026-01-28T11:40:00-05:00",
+          "from": "Daniel Okafor <daniel.okafor@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Montreal bus ticket",
+          "body": "Hi,\n\nAttached is my e-ticket for the August 2023 Montreal trip you asked about.\n\nDaniel\n",
+          "attachments": [
+            {
+              "filename": "northstar_eticket.txt",
+              "content_type": "text/plain",
+              "text": "NORTHSTAR COACH LINES - E-TICKET\nPassenger: Daniel Okafor\nBooking: NS-48213\nOutbound: 2023-08-12 07:30 New York (Port Authority) -> Montreal (Gare d'autocars)\nReturn: 2023-08-20 13:15 Montreal (Gare d'autocars) -> New York (Port Authority)\n"
+            }
+          ],
+          "facts": {
+            "kind": "carrier_doc",
+            "doc_type": "BUS_TICKET",
+            "depart": "2023-08-12",
+            "return": "2023-08-20"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1005",
+      "full_name": "Lucia Hernandez",
+      "dob": "1992-11-08",
+      "a_number": "A213907266",
+      "email": "lucia.hernandez@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2020-01-15",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2020-01-15",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "2410 Grand Concourse, Apt 4F",
+          "city": "Bronx",
+          "state": "NY",
+          "moved_in": "2019-08-01",
+          "moved_out": "2026-01-14"
+        },
+        {
+          "street": "540 W 165th St, Apt 2A",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2026-01-15",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01005",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-05-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-05-20",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-05-01",
+          "return_date": "2022-05-20",
+          "destination": "Mexico (Cancun)",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1006",
+      "full_name": "Tomasz Nowak",
+      "dob": "1987-02-14",
+      "a_number": "A208554130",
+      "email": "tomasz.nowak@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-09-01",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "75 Greenpoint Ave, Apt 3",
+          "city": "Brooklyn",
+          "state": "NY",
+          "moved_in": "2019-09-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": {
+        "spouse_name": "Agnieszka Nowak",
+        "marriage_date": "2016-07-09",
+        "spouse_status": "LPR",
+        "spouse_naturalized_on": null,
+        "status": "MARRIED"
+      },
+      "cbp_foia": {
+        "request_no": "CBP-2026-01006",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2022-01-10",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-09-05",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1006-1",
+          "doc_type": "US_EMPLOYMENT_LETTER",
+          "issuer": "Hudson Ridge Engineering LLC",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2021-06-01",
+          "covers_to": "2023-12-31",
+          "received_on": "2025-12-02"
+        },
+        {
+          "doc_id": "DOC-1006-2",
+          "doc_type": "RESIDENT_TAX_RETURN",
+          "issuer": "IRS Form 1040, tax year 2022",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2022-01-01",
+          "covers_to": "2022-12-31",
+          "received_on": "2025-12-02"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-01-10",
+          "return_date": "2022-09-05",
+          "destination": "United Kingdom (work assignment)",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1007",
+      "full_name": "Maria Santos",
+      "dob": "1979-08-21",
+      "a_number": "A203872045",
+      "email": "maria.santos@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2018-03-01",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "97-40 62nd Dr, Apt 9C",
+          "city": "Rego Park",
+          "state": "NY",
+          "moved_in": "2017-01-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01007",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-02-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-10-15",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1007-1",
+          "doc_type": "RESIDENT_TAX_RETURN",
+          "issuer": "IRS Form 1040, tax year 2023",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2023-01-01",
+          "covers_to": "2023-12-31",
+          "received_on": "2025-12-08"
+        },
+        {
+          "doc_id": "DOC-1007-2",
+          "doc_type": "US_LEASE_OR_DEED",
+          "issuer": "Lease, 97-40 62nd Dr Apt 9C",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2023-03-01",
+          "covers_to": "2024-02-29",
+          "received_on": "2025-12-08"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-02-01",
+          "return_date": "2023-10-15",
+          "destination": "Philippines (family care)",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1008",
+      "full_name": "Chinedu Eze",
+      "dob": "1981-05-05",
+      "a_number": "A201664398",
+      "email": "chinedu.eze@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2016-06-01",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "1520 Sheridan Ave, Apt 5D",
+          "city": "Bronx",
+          "state": "NY",
+          "moved_in": "2016-06-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01008",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2021-09-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-10-10",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2021-09-01",
+          "return_date": "2022-10-10",
+          "destination": "Nigeria",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1009",
+      "full_name": "Wei Zhang",
+      "dob": "1991-12-19",
+      "a_number": "A214086731",
+      "email": "wei.zhang@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2022-08-01",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "I797_NOTICE",
+          "form": "I-485",
+          "record_date": "2022-08-01",
+          "note": "I-485 approval notice"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "2250 Shattuck Ave",
+          "city": "Berkeley",
+          "state": "CA",
+          "moved_in": "2019-01-01",
+          "moved_out": "2021-05-31"
+        },
+        {
+          "street": "400 Chambers St, Apt 1207",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2021-06-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": {
+        "spouse_name": "Kevin Zhang",
+        "marriage_date": "2021-05-15",
+        "spouse_status": "USC_NATURALIZED",
+        "spouse_naturalized_on": "2023-11-20",
+        "status": "MARRIED"
+      },
+      "cbp_foia": {
+        "request_no": "CBP-2026-01009",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2024-12-20",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-01-05",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2024-12-20",
+          "return_date": "2025-01-05",
+          "destination": "China",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1010",
+      "full_name": "Fatima Malik",
+      "dob": "1989-03-11",
+      "a_number": "A210559847",
+      "email": "fatima.malik@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2022-01-10",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "63-11 Queens Blvd, Apt 2E",
+          "city": "Woodside",
+          "state": "NY",
+          "moved_in": "2019-06-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": {
+        "spouse_name": "Imran Malik",
+        "marriage_date": "2019-06-01",
+        "spouse_status": "USC_BY_BIRTH",
+        "spouse_naturalized_on": null,
+        "status": "MARRIED"
+      },
+      "cbp_foia": {
+        "request_no": "CBP-2026-01010",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2024-11-20",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-12-02",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2024-11-20",
+          "return_date": "2024-12-02",
+          "destination": "Pakistan",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2025-12-03_fatima-malik.eml",
+          "date": "2025-12-03T21:17:00-05:00",
+          "from": "Fatima Malik <fatima.malik@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Update",
+          "body": "Hi,\n\nI should tell you that my husband and I separated. We have been living apart since June 15, 2025. Does this change anything for my citizenship application?\n\nFatima\n",
+          "attachments": [],
+          "facts": {
+            "kind": "separation",
+            "since": "2025-06-15"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1011",
+      "full_name": "Arjun Mehta",
+      "dob": "1984-07-02",
+      "a_number": "A212447093",
+      "email": "arjun.mehta@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2020-02-01",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "401 Clinton St, Apt 4",
+          "city": "Brooklyn",
+          "state": "NY",
+          "moved_in": "2018-01-01",
+          "moved_out": "2024-03-31"
+        },
+        {
+          "street": "200 E 32nd St, Apt 18F",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2024-04-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01011",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2021-04-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-08-20",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-10-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-03-15",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-05-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-10-25",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-01-05",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-06-30",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-09-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-02-20",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-05-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-08-15",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-03-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-05-10",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2021-04-01",
+          "return_date": "2021-08-20",
+          "destination": "Singapore",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2021-10-01",
+          "return_date": "2022-03-15",
+          "destination": "Germany",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2022-05-01",
+          "return_date": "2022-10-25",
+          "destination": "Singapore",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2023-01-05",
+          "return_date": "2023-06-30",
+          "destination": "India",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2023-09-01",
+          "return_date": "2024-02-20",
+          "destination": "United Arab Emirates",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2024-05-01",
+          "return_date": "2024-08-15",
+          "destination": "Germany",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2025-03-01",
+          "return_date": "2025-05-10",
+          "destination": "India",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1012",
+      "full_name": "Sofia Rossi",
+      "dob": "1986-10-25",
+      "a_number": "A207229518",
+      "email": "sofia.rossi@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I797_NOTICE",
+          "form": "I-485",
+          "record_date": "2019-03-10",
+          "note": "I-485 approval notice (no card scan on file)"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-03-01",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "245 E 19th St, Apt 7K",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2017-05-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01012",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2025-08-02",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-08-16",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2025-08-02",
+          "return_date": "2025-08-16",
+          "destination": "Italy",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-12_sofia-rossi.eml",
+          "date": "2026-02-12T08:55:00-05:00",
+          "from": "Sofia Rossi <sofia.rossi@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "New address",
+          "body": "Hello,\n\nWe moved to Jersey City, NJ on February 7, 2026. The new address is 88 Grove St, Apt 5C, Jersey City, NJ 07302.\n\nBest,\nSofia\n",
+          "attachments": [],
+          "facts": {
+            "kind": "move",
+            "state": "NJ",
+            "moved_in": "2026-02-07"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1013",
+      "full_name": "Kwame Asante",
+      "dob": "1990-04-17",
+      "a_number": "A215390662",
+      "email": "kwame.asante@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2021-06-18",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "1185 Fulton St, Apt 3",
+          "city": "Brooklyn",
+          "state": "NY",
+          "moved_in": "2021-06-18",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01013",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-07-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-07-29",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-07-01",
+          "return_date": "2023-07-29",
+          "destination": "Ghana",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-20_kwame-asante.eml",
+          "date": "2026-02-20T13:31:00-05:00",
+          "from": "Kwame Asante <kwame.asante@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Travel next month",
+          "body": "Hi,\n\nQuick heads-up: I'm flying to Accra on March 10, 2026 for my sister's wedding and coming back on April 25, 2026.\n\nKwame\n",
+          "attachments": [],
+          "facts": {
+            "kind": "planned_trip",
+            "depart": "2026-03-10",
+            "return": "2026-04-25"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1014",
+      "full_name": "Elena Popescu",
+      "dob": "1976-01-30",
+      "a_number": "A202981407",
+      "email": "elena.popescu@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2017-10-01",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "31-48 37th St, Apt 2",
+          "city": "Astoria",
+          "state": "NY",
+          "moved_in": "2017-10-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01014",
+        "coverage_from": "2021-06-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2021-07-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-12-20",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-02-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-07-25",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-10-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-03-25",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-06-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-11-25",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-03-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-08-20",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-06-01",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-06-12",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1014-1",
+          "doc_type": "AIRLINE_ITINERARY",
+          "issuer": "Atlantic Crest Airways (JFK-OTP)",
+          "depart_date": "2021-02-10",
+          "return_date": "2021-04-02",
+          "covers_from": null,
+          "covers_to": null,
+          "received_on": "2025-12-15"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2021-02-08",
+          "return_date": "2021-04-02",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2021-07-01",
+          "return_date": "2021-12-20",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2022-02-01",
+          "return_date": "2022-07-25",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2022-10-01",
+          "return_date": "2023-03-25",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2023-06-01",
+          "return_date": "2023-11-25",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2024-03-01",
+          "return_date": "2024-08-20",
+          "destination": "Romania",
+          "answered_on": "2025-11-10"
+        },
+        {
+          "depart_date": "2025-06-01",
+          "return_date": "2025-06-12",
+          "destination": "Italy",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    },
+    {
+      "client_id": "C-1015",
+      "full_name": "Hiroshi Tanaka",
+      "dob": "1982-08-08",
+      "a_number": "A205517360",
+      "email": "hiroshi.tanaka@example.com",
+      "in_queue": false,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2023-04-02",
+          "note": "Resident Since, front of card"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "15 W 72nd St, Apt 9",
+          "city": "New York",
+          "state": "NY",
+          "moved_in": "2023-04-02",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01015",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2025-01-03",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-01-19",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2025-01-03",
+          "return_date": "2025-01-19",
+          "destination": "Japan",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-09_hiroshi-tanaka.eml",
+          "date": "2026-02-09T16:20:00-05:00",
+          "from": "Hiroshi Tanaka <hiroshi.tanaka@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Question about timing",
+          "body": "Hello,\n\nA friend said I can apply for citizenship after three years. Is that right for me? I have been a resident since April 2023.\n\nHiroshi\n",
+          "attachments": [],
+          "facts": {
+            "kind": "none"
+          }
+        }
+      ]
+    },
+    {
+      "client_id": "C-1016",
+      "full_name": "Olga Petrova",
+      "dob": "1988-02-02",
+      "a_number": "A211804577",
+      "email": "olga.petrova@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I797_NOTICE",
+          "form": "I-751",
+          "record_date": "2022-04-11",
+          "note": "I-751 approval notice"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2020-03-30",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "2830 Ocean Pkwy, Apt 6J",
+          "city": "Brooklyn",
+          "state": "NY",
+          "moved_in": "2020-04-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01016",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2024-02-02",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-02-16",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2024-02-02",
+          "return_date": "2024-02-16",
+          "destination": "Kazakhstan",
+          "answered_on": "2025-11-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": []
+    }
+  ]
+}
