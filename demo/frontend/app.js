@@ -123,7 +123,8 @@ function renderTask() {
         <h3>What the agent gets</h3>
         <div class="instruction">${esc(o.instruction)}</div>
         <ul class="files">
-          <li><code>/app/review/cms.sqlite</code><br>The case database export: ${o.clients} clients, ${o.cbp_events} CBP entry and exit records, ${o.documents} documents on file.</li>
+          <li><code>/app/review/cms.sqlite</code><br>The case database export: ${o.clients} clients, ${o.documents} documents on file.</li>
+          <li><code>/app/review/foia/</code><br>${o.foia_pdfs} CBP FOIA responses as PDFs: a cover letter with the coverage window, then the entries and exits.</li>
           <li><code>/app/review/mail/</code><br>${o.emails} client emails, with ${o.attachments} attachments.</li>
           <li><code>/app/review/sop/</code><br>The firm's procedure (SOP NAT-04) and the output format.</li>
         </ul>
@@ -303,9 +304,12 @@ function renderRecords(d) {
     <div class="seg" role="group" aria-label="Which records">
       <button type="button" data-pane="db" aria-pressed="true">Case database</button>
       <button type="button" data-pane="mail" aria-pressed="false">Email (${d.records.emails.length})</button>
+      <button type="button" data-pane="foia" aria-pressed="false">CBP FOIA (PDF)</button>
     </div>
     <div data-pane-body="db">${tableHTML}</div>
-    <div data-pane-body="mail" hidden>${mail}</div>`;
+    <div data-pane-body="mail" hidden>${mail}</div>
+    <div data-pane-body="foia" hidden><p class="muted small"><code>${esc(d.records.foia.file)}</code>, the text of each page</p>
+      ${d.records.foia.pages.map((p, i) => `<div class="attachment"><p>Page ${i + 1} of ${d.records.foia.pages.length}</p><pre>${esc(p)}</pre></div>`).join("")}</div>`;
 }
 
 function renderDetail(d) {
