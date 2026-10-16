@@ -78,8 +78,13 @@ def printed_date(s, fmt):
     return date(y, b, a) if fmt == "DD/MM/YYYY" else date(y, a, b)
 
 
+def in_us(place):
+    return place.endswith("USA") or any(city in place for city in ("New York", "Newark", "Boston"))
+
+
 def read_itinerary(data):
-    """A carrier itinerary PDF: the flight out of the US and the flight back."""
+    """A carrier itinerary PDF (SOP 4.3(b)): only a leg that leaves or enters the United States sets a
+    date. Returns (US departure or None, US arrival), or None when no leg arrives in the US."""
     lines = [line for page in pdf_lines(data) for line in page]
     text = "\n".join(" ".join(line) for line in lines)
     fmt = re.search(r"dates in this document are shown as (DD/MM/YYYY|MM/DD/YYYY)", text, re.I)
@@ -87,14 +92,14 @@ def read_itinerary(data):
     out = back = None
     for line in lines:
         when = next((c for c in line if re.fullmatch(r"\d{2}/\d{2}/\d{4}", c)), None)
-        if when is None or len(line) < 4:
+        if when is None or len(line) < 6:
             continue
-        frm, to = line[2], line[3]
-        if "New York" in frm or "Newark" in frm or "Boston" in frm:
+        frm, to, arrives = line[2], line[3], line[5]
+        if in_us(frm) and not in_us(to) and out is None:
             out = printed_date(when, fmt)
-        elif "New York" in to or "Newark" in to or "Boston" in to:
-            back = printed_date(when, fmt)
-    return (out, back) if out and back else None
+        elif not in_us(frm) and in_us(to):  # the arrival date: the leg's date, plus one for "+1"
+            back = printed_date(when, fmt) + timedelta(1 if arrives.endswith("+1") else 0)
+    return (out, back) if back else None
 
 
 def planned_in(text):
@@ -107,7 +112,8 @@ def planned_in(text):
 def read_mail(clients_by_email, clients_by_signature):
     """What each client told us by email (SOP 2: it controls over the CMS)."""
     mail = defaultdict(lambda: {"statements": [], "carrier": [], "planned": [], "replaced": set(), "moves": [],
-                                "separated": False, "current_return": None})
+                                "separated": False, "current_return": None,
+                                "foia": []})
     for path in sorted((REVIEW / "mail").glob("*.eml")):  # file names start with the date: oldest first
         msg = email.message_from_bytes(path.read_bytes(), policy=email.policy.default)
         full = msg.get_body(preferencelist=("plain",)).get_content()
@@ -139,7 +145,11 @@ def read_mail(clients_by_email, clients_by_signature):
             info["separated"] = True
         for part in msg.iter_attachments():
             if part.get_content_type() == "application/pdf":
-                trip = read_itinerary(part.get_content())
+                data = part.get_content()
+                if "Customs and Border Protection" in " ".join(" ".join(line) for line in pdf_lines(data)[0]):
+                    info["foia"].append(data)  # SOP 2: a CBP response to the client's own FOIA request
+                    continue
+                trip = read_itinerary(data)
                 if trip:
                     info["carrier"].append(trip)
                 continue
@@ -151,14 +161,31 @@ def read_mail(clients_by_email, clients_by_signature):
     return mail
 
 
-def read_foia(cid, db):
-    """SOP 2 and 4.3(a): the client's CBP FOIA response, the latest one when CBP amended it.
-    Returns the coverage window and the client's own entries and exits (a joint response
-    also lists other travelers)."""
+def read_foia(cid, db, client_sent=()):
+    """SOP 2 and 4.3(a): the client's CBP FOIA responses: ours (the latest one when CBP amended it)
+    and any the client sent us. Returns the coverage windows and the client's own entries and exits
+    in the order they happened (a joint response also lists other travelers); a record that two
+    responses list counts once."""
     request = db.execute("SELECT request_no FROM cbp_foia_requests WHERE client_id = ?", (cid,)).fetchone()[0]
     client = db.execute("SELECT full_name, date_of_birth FROM clients WHERE client_id = ?", (cid,)).fetchone()
     amended = sorted((REVIEW / "foia").glob(f"{request}-A*.pdf"), key=lambda f: int(f.stem.rsplit("-A", 1)[1]))
-    pages = pdf_lines((amended[-1] if amended else REVIEW / "foia" / f"{request}.pdf").read_bytes())
+    ours = (amended[-1] if amended else REVIEW / "foia" / f"{request}.pdf").read_bytes()
+    windows, events, seen = [], [], set()
+    for data in (ours, *client_sent):
+        window, mine = parse_foia(data, client)
+        windows.append(window)
+        for e in mine:
+            if (e["event_date"], e["event_type"]) not in seen:
+                seen.add((e["event_date"], e["event_type"]))
+                events.append(e)
+    events.sort(key=lambda e: e["event_date"])  # stable: crossings on one day keep the response's order
+    return windows, events
+
+
+def parse_foia(data, client):
+    """One CBP FOIA response PDF: its coverage window and the client's records, oldest first. The table
+    lists the crossings in the order they happened, newest first, so reversing it gives their order."""
+    pages = pdf_lines(data)
     letter = " ".join(" ".join(line) for line in pages[0])
     lo, hi = re.search(r"from " + PROSE_DATE + r" through " + PROSE_DATE, letter).groups()
     name = sorted(client["full_name"].upper().split())
@@ -174,8 +201,8 @@ def read_foia(cid, db):
                 continue  # another traveler in a joint response
             events.append({"event_date": printed_date(when, fmt).isoformat(),
                            "event_type": "ARRIVAL" if kind == "Entry" else "DEPARTURE"})
-    events.sort(key=lambda e: (e["event_date"], e["event_type"] == "ARRIVAL"))
-    return {"coverage_from": prose(lo).isoformat(), "coverage_to": prose(hi).isoformat()}, events
+    events.reverse()
+    return (prose(lo), prose(hi)), events
 
 
 def lpr_date(rows):
@@ -186,13 +213,14 @@ def lpr_date(rows):
     return i485[0] if i485 else None
 
 
-def build_trips(foia, events, carrier, statements):
+def build_trips(windows, events, carrier, statements):
     """SOP 4.4-4.5: returns [departure or None, return, verified] lists, and the date of a CBP
     departure with no later arrival (the client is still abroad), or None."""
-    lo, hi = iso(foia["coverage_from"]), iso(foia["coverage_to"])
+    inside = lambda day: any(lo <= day <= hi for lo, hi in windows)
     near = lambda a, b: abs((a - b).days) <= 3
+    carrier = [(dep, ret) for dep, ret in carrier if dep]  # a document with no US departure gives no departure date
     trips, departed = [], None
-    for ev in events:  # ordered by date, departures first on the same day
+    for ev in events:  # in the order the crossings happened
         when = iso(ev["event_date"])
         if ev["event_type"] == "DEPARTURE":
             departed = when
@@ -204,10 +232,10 @@ def build_trips(foia, events, carrier, statements):
             said = next((dep for dep, ret in statements if near(ret, when)), None)
             trips.append([doc, when, True] if doc else [said, when, False])
         departed = None
-    outside = [(dep, ret) for dep, ret in carrier if not lo <= ret <= hi]
+    outside = [(dep, ret) for dep, ret in carrier if not inside(ret)]
     trips += [[dep, ret, True] for dep, ret in outside]
     for dep, ret in statements:
-        if lo <= ret <= hi or any(near(ret, r) for _, r in outside):
+        if inside(ret) or any(near(ret, r) for _, r in outside):
             continue
         trips.append([dep, ret, False])
     return trips, departed
@@ -232,8 +260,8 @@ def decide(cid, db, mail):
     carrier = [(iso(d["depart_date"]), iso(d["return_date"])) for d in docs if d["doc_type"] in CARRIER] + info["carrier"]
     statements = [(iso(t["depart_date"]), iso(t["return_date"])) for t in rows("SELECT * FROM questionnaire_trips WHERE client_id = ?")]
     statements += info["statements"]
-    foia, events = read_foia(cid, db)
-    trips, abroad_since = build_trips(foia, events, carrier, statements)
+    windows, events = read_foia(cid, db, info["foia"])
+    trips, abroad_since = build_trips(windows, events, carrier, statements)
     trips = [t for t in trips if t[0] is None or t[0] >= lpr]  # SOP 4.2
     if any(not ok and ret >= LOOKBACK for _, ret, ok in trips):  # SOP 4.6
         return request

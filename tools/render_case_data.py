@@ -3,7 +3,8 @@
 
 Writes, under environment/data/review:
 - cms.sql: the CMS export as SQL text (the agent image builds cms.sqlite from it)
-- mail/*.eml: client email, attachments included (text files and PDFs)
+- mail/*.eml: client email, attachments included (text files and PDFs, among them a CBP FOIA response
+  a client requested and sent us)
 - foia/<request number>.pdf: one CBP FOIA response per request, as a text-based PDF; when CBP
   amended its response, the first one stays as <request number>.pdf and the amended one is
   <request number>-A1.pdf
@@ -161,8 +162,8 @@ def traveler(name):
 
 
 def render_foia_pdf(c, first=False):
-    """CBP's response to one FOIA request: a cover letter, then the travel records, newest first.
-    With first=True, the response that a later amended response replaces."""
+    """CBP's response to one of the firm's FOIA requests. With first=True, the response that a later
+    amended response replaces."""
     foia = dict(c["cbp_foia"])
     events = c["cbp_events"]
     amended = "superseded_response" in foia
@@ -172,25 +173,34 @@ def render_foia_pdf(c, first=False):
     if foia.get("joint_traveler"):
         j = foia["joint_traveler"]
         people.append((j["name"], j["dob"], j["events"]))
+    request = foia["request_no"] + ("-A1" if amended and not first else "")
+    replaces = foia["superseded_response"]["received_on"] if request != foia["request_no"] else None
+    return foia_response_pdf(foia, people, request, ["Calder & Voss Immigration PLLC", "Attn: N-400 review team"], replaces)
+
+
+def foia_response_pdf(foia, people, request, addressee, replaces=None):
+    """A CBP FOIA response: a cover letter, then the travel records in the order the crossings happened,
+    newest first. people: (name, date of birth, events in the order they happened)."""
     rows = []
     for name, dob, events in people:
-        for e in events:
-            rows.append((e["date"], "Entry" if e["type"] == "ARRIVAL" else "Exit", PORTS.get(e["port"], e["port"]),
+        for i, e in enumerate(events):
+            same_day = sum(1 for x in events[:i] if x["date"] == e["date"])  # crossings earlier that day
+            rows.append((e["date"], same_day, "Entry" if e["type"] == "ARRIVAL" else "Exit", PORTS.get(e["port"], e["port"]),
                          MODES[e["mode"]], traveler(name), mdy(dob)))
-    rows.sort(key=lambda r: (r[0], r[1] == "Entry", r[4]), reverse=True)  # newest first; on one day the entry follows the exit
+    rows.sort(key=lambda r: (r[0], r[1], r[5]), reverse=True)  # newest first, later crossings of a day above earlier ones
+    rows = [(r[0],) + r[2:] for r in rows]
     subjects = "; ".join(f"{traveler(n)} (date of birth {mdy(b)})" for n, b, _ in people)
-    request = foia["request_no"] + ("-A1" if amended and not first else "")
     letter = [
         ("B", 11, "U.S. Customs and Border Protection"), ("R", 10, "FOIA Division"),
         ("R", 10, "90 K Street NE, Washington, DC 20229"), ("R", 10, ""), ("R", 10, words(foia["received_on"])), ("R", 10, ""),
-        ("R", 10, "Calder & Voss Immigration PLLC"), ("R", 10, "Attn: N-400 review team"), ("R", 10, ""),
-        ("B", 10, f"Re: FOIA request {foia['request_no']}" + (" (amended response)" if request != foia["request_no"] else "")),
+        *[("R", 10, line) for line in addressee], ("R", 10, ""),
+        ("B", 10, f"Re: FOIA request {foia['request_no']}" + (" (amended response)" if replaces else "")),
         ("R", 10, ""), ("R", 10, "Dear Requester:"), ("R", 10, ""),
     ]
     para = []
-    if request != foia["request_no"]:
+    if replaces:
         para.append(f"This is an amended response to your request. It replaces our response of "
-                    f"{words(foia['superseded_response']['received_on'])}, in which one record was listed with an incorrect "
+                    f"{words(replaces)}, in which one record was listed with an incorrect "
                     f"date. Please disregard that response and rely on the records below.")
     para += [f"This responds to your Freedom of Information Act request for the travel history of {subjects}. "
              f"We searched the records of entries into and exits from the United States from "
@@ -225,7 +235,9 @@ def render_foia_pdf(c, first=False):
 def render_itinerary_pdf(a):
     """A European carrier's e-ticket itinerary; it prints dates in the format its header states."""
     fmt = lambda iso: date.fromisoformat(iso).strftime("%d/%m/%Y" if a["date_format"] == "DD/MM/YYYY" else "%m/%d/%Y")
-    page = [(72, 740, "B", 14, a["carrier"]), (72, 720, "R", 10, "E-ticket itinerary / Itinerario do bilhete eletronico"),
+    subtitle = a.get("subtitle", "E-ticket itinerary / Itinerario do bilhete eletronico")
+    note = a.get("note", "Checked baggage: 1 x 23 kg. Please be at the airport 3 hours before an intercontinental departure.")
+    page = [(72, 740, "B", 14, a["carrier"]), (72, 720, "R", 10, subtitle),
             (72, 696, "R", 10, f"Booking reference: {a['booking']}"), (72, 681, "R", 10, f"Passenger: {a['passenger']}"),
             (72, 657, "B", 10, f"All dates in this document are shown as {a['date_format']}."),
             (72, 627, "B", 9, "Flight"), (126, 627, "B", 9, "Date"), (190, 627, "B", 9, "From"),
@@ -235,11 +247,17 @@ def render_itinerary_pdf(a):
         page += [(72, y, "R", 9, f["flight"]), (126, y, "R", 9, fmt(f["date"])), (190, y, "R", 9, f["from"]),
                  (330, y, "R", 9, f["to"]), (470, y, "R", 9, f["dep"]), (520, y, "R", 9, f["arr"])]
     page += [(72, 540, "R", 9, "Times are local. +1 means the next day."),
-             (72, 525, "R", 9, "Checked baggage: 1 x 23 kg. Please be at the airport 3 hours before an intercontinental departure.")]
+             (72, 525, "R", 9, note)]
     return pdf_bytes([page])
 
 
 # --------------------------------------------------------------------------- email
+
+
+def render_client_foia_pdf(e, a):
+    """CBP's response to a FOIA request the client made, attached to the client's email."""
+    f = e["facts"]
+    return foia_response_pdf(f, [(a["traveler"], a["dob"], f["events"])], f["request_no"], a["addressee"])
 
 
 def render_email(e):
@@ -254,6 +272,8 @@ def render_email(e):
     for a in e["attachments"]:
         if a.get("pdf") == "itinerary":
             msg.add_attachment(render_itinerary_pdf(a), maintype="application", subtype="pdf", filename=a["filename"])
+        elif a.get("pdf") == "foia":
+            msg.add_attachment(render_client_foia_pdf(e, a), maintype="application", subtype="pdf", filename=a["filename"])
         else:
             msg.add_attachment(a["text"], subtype="plain", filename=a["filename"])
     if msg.is_multipart():

@@ -243,7 +243,7 @@ ul.checklist li:first-child { border-top: 0; }
 .pill.done, .pill.pass { background: var(--tint-green); color: var(--green); }
 .pill.pending { background: var(--tint-blue); color: var(--blue); }
 .pill.waiting { background: var(--rule-2); color: var(--ink-2); }
-.pill.failed, .pill.fail { background: var(--tint-red); color: var(--red); }
+.pill.failed, .pill.fail, .pill.not-met { background: var(--tint-red); color: var(--red); }
 ul.checklist .what { font-weight: 600; line-height: 1.35; }
 ul.checklist .detail { grid-column: 2; color: var(--ink-2); font-size: 0.86rem; overflow-wrap: anywhere; }
 table.trials { border-collapse: collapse; width: 100%; font-size: 0.9rem; }

@@ -49,7 +49,7 @@ The "What's done" page shows trial results when it finds `results/summary.json` 
       ]
     }
 
-`status` is one of `done`, `pending`, `waiting` or `failed`. `missed` lists the clients a trial got wrong, and each one links to that client's page.
+`status` is one of `done`, `pending`, `waiting`, `failed` or `not met`. `missed` lists the clients a trial got wrong, and each one links to that client's page.
 
 ## Files
 

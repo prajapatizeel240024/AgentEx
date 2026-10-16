@@ -453,7 +453,7 @@ async function renderDone(root) {
   const checks = st.checks.map((c) => `
     <li><span class="pill ${c.ok ? "pass" : "fail"}">${c.ok ? "pass" : "fail"}</span><span class="what">${esc(c.name)}</span>${c.detail ? `<span class="detail">${esc(c.detail)}</span>` : ""}</li>`).join("");
   const reqs = st.requirements.map((r) => `
-    <li><span class="pill ${esc(r.status)}">${esc(r.status)}</span><span class="what">${esc(r.label)}</span>${r.detail ? `<span class="detail">${esc(r.detail)}</span>` : ""}</li>`).join("");
+    <li><span class="pill ${esc(r.status.replace(/ /g, "-"))}">${esc(r.status)}</span><span class="what">${esc(r.label)}</span>${r.detail ? `<span class="detail">${esc(r.detail)}</span>` : ""}</li>`).join("");
   const missed = (list) => (list && list.length ? list.map((cid) => `<a href="#/clients/${esc(cid)}">${esc(cid)}</a>`).join(", ") : "none");
   const trials = st.trials.length ? `
     <table class="trials">
