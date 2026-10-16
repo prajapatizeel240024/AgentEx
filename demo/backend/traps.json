@@ -9,131 +9,496 @@
     },
     "C-1002": {
       "title": "The green-card date, not the I-751 date",
-      "story": "His 10-year green card says Resident Since 2021-06-15. The I-751 approval notice and his own questionnaire both say 2023-09-20, but the SOP never uses either. He has been married to a US citizen by birth since 2020, so he can file today on the 3-year basis.",
+      "story": "His 10-year green card says Resident Since 2021-06-15. The I-751 approval notice and his own questionnaire both say 2023-09-20, but the SOP never uses either. He has been married to a US citizen by birth since 2020, so he can file today on the 3-year basis. His CBP FOIA response is a joint one: his wife's travel is listed with his. Her drive back from Canada in August 2024 has no recorded exit; counted as his, it is an unverified trip in the last five years.",
       "wrong": [
-        {"answer": "SCHEDULE, 3-year, 2026-06-22", "why": "taking the date from the I-751 notice or the questionnaire"}
+        {
+          "answer": "SCHEDULE, 3-year, 2026-06-22",
+          "why": "taking the date from the I-751 notice or the questionnaire"
+        },
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "counting his wife's records in the joint FOIA response as his"
+        }
       ]
     },
     "C-1003": {
       "title": "A hotel receipt is not proof of travel",
       "story": "CBP recorded her driving back from Montreal on 2024-07-09, but land departures are never recorded. Her email says she left on 2024-07-04 and attaches a hotel receipt. A receipt is not a carrier document, so the departure rests only on her word. The trip is unverified and recent, so the firm needs more evidence before deciding.",
       "wrong": [
-        {"answer": "FILE_NOW", "why": "accepting her email or the hotel receipt as proof of the departure date"}
+        {
+          "answer": "FILE_NOW",
+          "why": "accepting her email or the hotel receipt as proof of the departure date"
+        }
       ]
     },
     "C-1004": {
       "title": "The bus ticket in the email attachment",
       "story": "CBP shows him coming back from Montreal over land on 2023-08-20, with no departure. His questionnaire says he left on 2023-08-11, which alone would not count. His email attaches a bus e-ticket (out 2023-08-12, back 2023-08-20). That is a carrier document, so the trip is verified and he can file today.",
       "wrong": [
-        {"answer": "REQUEST_EVIDENCE", "why": "missing the attachment, so the trip looks unverified"}
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "missing the attachment, so the trip looks unverified"
+        }
       ]
     },
     "C-1005": {
       "title": "CBP beats the questionnaire, and a move within the state",
       "story": "Her questionnaire lists a Mexico trip in May 2022, but CBP has no arrival anywhere near then; CBP shows the trip in May 2023. Inside the CBP coverage window CBP controls, so the questionnaire trip is disregarded. She also moved from the Bronx to Manhattan in January 2026. A move within New York doesn't restart the 3-month state rule.",
       "wrong": [
-        {"answer": "REQUEST_EVIDENCE", "why": "treating the questionnaire trip as an unverified trip"},
-        {"answer": "SCHEDULE, 5-year, 2026-04-15", "why": "restarting the 3 months at a move within the same state"}
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "treating the questionnaire trip as an unverified trip"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2026-04-15",
+          "why": "restarting the 3 months at a move within the same state"
+        }
       ]
     },
     "C-1006": {
       "title": "A long trip that is rebutted",
       "story": "He was in the UK for about 8 months (2022-01-10 to 2022-09-05), which would presume a break. But his employment letter and his 2022 tax return both cover the whole absence: two different document types, so the presumption is rebutted and there is no break. His wife is a permanent resident, not a citizen, so there is no 3-year basis.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2027-03-05", "why": "ignoring the rebuttal documents and treating the trip as a break"}
+        {
+          "answer": "SCHEDULE, 5-year, 2027-03-05",
+          "why": "ignoring the rebuttal documents and treating the trip as a break"
+        }
       ]
     },
     "C-1007": {
       "title": "Rebuttal documents must cover the whole trip",
       "story": "She was abroad for about 8.5 months (2023-02-01 to 2023-10-15). She has a tax return and a lease, which looks like two rebuttal documents. But the lease starts on 2023-03-01, a month after she left, so only one type covers the whole absence. The trip breaks continuous residence, and she must wait 4 years and 6 months after her return.",
       "wrong": [
-        {"answer": "FILE_NOW", "why": "counting the lease"},
-        {"answer": "SCHEDULE, 5-year, 2027-10-16", "why": "using the 4-years-and-1-day wait, which applies only to an absence of a year or more with rebuttal documents"},
-        {"answer": "SCHEDULE, 5-year, 2028-01-16", "why": "applying the 90-day early window after a break"},
-        {"answer": "SCHEDULE, 5-year, 2028-07-17", "why": "the older rule of 5 years minus 90 days"}
+        {
+          "answer": "FILE_NOW",
+          "why": "counting the lease"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2027-10-16",
+          "why": "using the 4-years-and-1-day wait, which applies only to an absence of a year or more with rebuttal documents"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2028-01-16",
+          "why": "applying the 90-day early window after a break"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2028-07-17",
+          "why": "the older rule of 5 years minus 90 days"
+        }
       ]
     },
     "C-1008": {
       "title": "A year away with no rebuttal documents",
       "story": "He was in Nigeria for 13 months (2021-09-01 to 2022-10-10), which always breaks continuous residence. The well-known '4 years and 1 day' wait applies only with rebuttal documents, and he has none, so he waits 4 years and 6 months after his return. The 90-day early window never applies after a break.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2026-10-11", "why": "using 4 years and 1 day without rebuttal documents"},
-        {"answer": "SCHEDULE, 5-year, 2027-01-10", "why": "applying the 90-day early window after a break"},
-        {"answer": "FILE_NOW", "why": "ignoring the break"}
+        {
+          "answer": "SCHEDULE, 5-year, 2026-10-11",
+          "why": "using 4 years and 1 day without rebuttal documents"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2027-01-10",
+          "why": "applying the 90-day early window after a break"
+        },
+        {
+          "answer": "FILE_NOW",
+          "why": "ignoring the break"
+        }
       ]
     },
     "C-1009": {
       "title": "The spouse's own 3 years as a citizen",
       "story": "She has been married since 2021 and a permanent resident since 2022-08-01, so the 3-year basis looks open now. But her husband only became a citizen on 2023-11-20, and the 3-year basis needs him to have been a citizen for 3 years: 2026-11-20. The 90-day early window applies only to continuous residence, never to the marriage rules. That is still earlier than her 5-year date (2027-05-03).",
       "wrong": [
-        {"answer": "FILE_NOW, 3-year", "why": "ignoring when the spouse became a citizen"},
-        {"answer": "SCHEDULE, 3-year, 2026-08-22", "why": "applying the 90-day window to the spouse's citizenship date"}
+        {
+          "answer": "FILE_NOW, 3-year",
+          "why": "ignoring when the spouse became a citizen"
+        },
+        {
+          "answer": "SCHEDULE, 3-year, 2026-08-22",
+          "why": "applying the 90-day window to the spouse's citizenship date"
+        }
       ]
     },
     "C-1010": {
       "title": "A separation reported only by email",
-      "story": "The CMS shows her married to a US citizen since 2019, which would open the 3-year basis now. But in December 2025 she emailed that they have been living apart since June 15, 2025. Email controls over the CMS, and a separation removes the 3-year basis. On the 5-year basis she can file on 2026-10-12.",
+      "story": "The CMS shows her married to a US citizen since 2019, which would open the 3-year basis now. But in December 2025 she emailed that they have been living apart since June 15, 2025. Email controls over the CMS, and a separation removes the 3-year basis. On the 5-year basis she can file on 2026-10-12. She wrote from a personal address that is not in the CMS; the email is hers because it is signed with her full name and A-number.",
       "wrong": [
-        {"answer": "FILE_NOW, 3-year", "why": "missing the separation email"}
+        {
+          "answer": "FILE_NOW, 3-year",
+          "why": "missing the separation email, which comes from an address not in the CMS"
+        }
       ]
     },
     "C-1011": {
       "title": "Days present on a sliding window",
       "story": "He took seven long trips, each under 6 months, so none breaks continuous residence. But he needs 913 days in the US within the 5 years before filing, and on the review date he is short. As the filing date moves later, the 5-year window slides past his oldest trips, and he reaches 913 days on 2026-06-28.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2026-05-28", "why": "adding the missing days to the review date instead of sliding the window"}
+        {
+          "answer": "SCHEDULE, 5-year, 2026-05-28",
+          "why": "adding the missing days to the review date instead of sliding the window"
+        }
       ]
     },
     "C-1012": {
       "title": "No card scan, and a move only in email",
       "story": "There is no green card scan, so the date comes from the I-485 approval notice: 2019-03-10 (her questionnaire says 2019-03-01, which is never used). The CMS still shows her in New York, but she emailed that she moved to Jersey City, NJ on 2026-02-07. She must live in New Jersey for 3 months first: 2026-05-07.",
       "wrong": [
-        {"answer": "FILE_NOW", "why": "missing the move email and using the CMS address"}
+        {
+          "answer": "FILE_NOW",
+          "why": "missing the move email and using the CMS address"
+        }
       ]
     },
     "C-1013": {
       "title": "Never file while the client is abroad",
       "story": "His continuous residence is met on 2026-03-20. But he emailed that he is flying to Accra on March 10, 2026 for his sister's wedding and coming back on April 25, 2026. The firm never files while the client is away, so the earliest date is the day he comes back.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2026-03-20", "why": "ignoring the trip announced in his email"}
+        {
+          "answer": "SCHEDULE, 5-year, 2026-03-20",
+          "why": "ignoring the trip announced in his email"
+        }
       ]
     },
     "C-1014": {
       "title": "A trip that starts before the window",
       "story": "CBP coverage starts on 2021-06-01, so her early-2021 trip comes from an airline itinerary (2021-02-10 to 2021-04-02). Her questionnaire says she left on 2021-02-08, but the carrier document wins. The trip straddles the start of her 5-year window (2021-03-02), and only the days inside the window count: 920 days present, just over the 913 needed.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2026-04-02", "why": "counting the days of the trip that fall before the 5-year window"}
+        {
+          "answer": "SCHEDULE, 5-year, 2026-04-02",
+          "why": "counting the days of the trip that fall before the 5-year window"
+        }
       ]
     },
     "C-1015": {
       "title": "Not in the review queue",
       "story": "He is a client and he emailed the firm, but he isn't in this month's review queue. The output must have exactly one decision per queued client and nobody else.",
       "wrong": [
-        {"answer": "Any decision for C-1015", "why": "deciding every client in the CMS instead of the review queue"}
+        {
+          "answer": "Any decision for C-1015",
+          "why": "deciding every client in the CMS instead of the review queue"
+        }
       ]
     },
     "C-1016": {
       "title": "No usable green-card date",
       "story": "The file has no card scan and no I-485 approval notice, only an I-751 notice (2022-04-11) and her questionnaire (2020-03-30). The SOP never uses either, so the firm can't decide yet and must ask for evidence.",
       "wrong": [
-        {"answer": "SCHEDULE, 5-year, 2027-01-11", "why": "using the I-751 date"},
-        {"answer": "FILE_NOW", "why": "using the questionnaire date"}
+        {
+          "answer": "SCHEDULE, 5-year, 2027-01-11",
+          "why": "using the I-751 date"
+        },
+        {
+          "answer": "FILE_NOW",
+          "why": "using the questionnaire date"
+        }
+      ]
+    },
+    "C-1017": {
+      "title": "A rebutted year away: 4 years and 1 day",
+      "story": "She was away from 2021-06-10 to 2022-07-20, more than a year, so continuous residence broke. An employment letter and a lease both cover the whole absence, so the wait is 4 years and 1 day from her return, not 4 years and 6 months. She can file on 2026-07-21.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2027-01-20",
+          "why": "ignoring the rebuttal documents (4 years and 6 months)"
+        },
+        {
+          "answer": "FILE_NOW",
+          "why": "treating the rebutted year like a rebutted 6 to 12 month absence, with no break"
+        }
+      ]
+    },
+    "C-1018": {
+      "title": "Only the latest break counts",
+      "story": "A 7-month absence in 2021-2022 is rebutted: his employment letter and lease both cover it. A second 7-month absence, 2023-10-15 to 2024-05-25, is not: the lease ends before he came back and the 2023 tax return ends before that too. That later absence breaks continuous residence, so he waits 4 years and 6 months from 2024-05-25.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "counting documents that cover only part of the second absence as rebuttal"
+        }
+      ]
+    },
+    "C-1019": {
+      "title": "A trip that began before she became a resident",
+      "story": "She left on 2021-01-10 on advance parole, her I-485 was approved on 2021-03-15 while she was abroad, and she came back on 2021-09-20. The trip started before her permanent-resident date, so SOP 4.2 leaves it out, and she can file today.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2026-03-20",
+          "why": "counting the 8-month trip, which makes a break"
+        }
+      ]
+    },
+    "C-1020": {
+      "title": "New York, New Jersey, then New York again",
+      "story": "The CMS still shows him in Hoboken, NJ since July 2025. His email, from a personal address but signed with his name and A-number, says he moved back to Astoria, NY on 2026-01-12. That is a move to another state, so the 3 months restart: he can file on 2026-04-12.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "missing the email from an address not in the CMS"
+        },
+        {
+          "answer": "FILE_NOW",
+          "why": "treating the return to New York as no move, since he lived there before"
+        }
+      ]
+    },
+    "C-1021": {
+      "title": "The spouse's 3 years, a planned trip, and a joint FOIA response",
+      "story": "Her husband naturalized on 2023-05-20, so the 3-year basis opens on 2026-05-20, but she will be abroad from 2026-05-08 to 2026-06-03. She can file on the day she returns. The FOIA response is joint: her husband's 7-month trip in 2024 is his, not hers.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 3-year, 2026-05-20",
+          "why": "ignoring the planned trip"
+        },
+        {
+          "answer": "FILE_NOW, 3-year",
+          "why": "applying the 90-day early window to the spouse's 3 years"
+        },
+        {
+          "answer": "SCHEDULE, 3-year, 2027-03-14",
+          "why": "counting her husband's trip from the joint FOIA response"
+        }
+      ]
+    },
+    "C-1022": {
+      "title": "A European itinerary printed as DD/MM/YYYY",
+      "story": "Her only evidence of a 2021 trip to Lisbon, before her FOIA coverage starts, is an airline itinerary PDF attached to an email. The carrier prints dates as DD/MM/YYYY, as its header says: she left on 6 February and came back on 10 September 2021, more than six months, so continuous residence broke. She can file on 2026-03-10.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "reading the itinerary dates as MM/DD/YYYY (2 June to 9 October, under six months)"
+        }
+      ]
+    },
+    "C-1023": {
+      "title": "Six calendar months, not 183 days",
+      "story": "She was in Tehran from 2025-07-31 to 2026-01-31, both dates in the CBP records. That is 184 days, but six calendar months after July 31 is January 31, so the return is not later than six months after she left (SOP 10). There is no break and no rebuttal is needed: she can file today.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2030-07-31",
+          "why": "counting six months as 180, 182 or 183 days, which makes the trip a break"
+        }
+      ]
+    },
+    "C-1024": {
+      "title": "365 days, but less than a year",
+      "story": "He was away from 2023-03-01 to 2024-02-29. That is 365 days, but 2024 is a leap year: one year after March 1, 2023 is March 1, 2024, so the absence is less than one year (SOP 10). It is more than six months, and an employment letter and the deed to his house both cover it, so the presumption is rebutted and there is no break. He can file today.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2028-03-01",
+          "why": "counting a year as 365 days, which makes it a rebutted absence of one year or more (4 years and 1 day)"
+        }
+      ]
+    },
+    "C-1025": {
+      "title": "Back from the trip, but still short of days",
+      "story": "Continuous residence is met on 2026-04-21, in the middle of her planned field season in Norway (2026-04-10 to 2026-06-25), so she can't file until she is back. On her return day she has only 896 of the 913 days present she needs, because of five long trips since 2021. Each day home adds one, so she can file on 2026-07-12.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2026-06-25",
+          "why": "filing on the return date without counting days present again, or not counting the planned trip's days abroad"
+        }
+      ]
+    },
+    "C-1026": {
+      "title": "A move announced for April",
+      "story": "His email (no word \"move\" in the subject) says the movers come on 2026-04-10 and the new home is in Philadelphia, PA. Continuous residence is met only on 2026-05-03, after the move, so on that date he has lived in Pennsylvania for less than 3 months. An announced move counts from its date (SOP 7): he can file on 2026-07-10.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2026-05-03",
+          "why": "using only the addresses he has already moved into"
+        }
+      ]
+    },
+    "C-1027": {
+      "title": "Still abroad on the review date",
+      "story": "CBP recorded him leaving JFK on 2025-10-20 and no return: he is still in Manila. His email says his flight home is booked for 2026-05-02. The current trip ends on that date (SOP 4.4). Six months after October 20 is April 20, so the absence is more than six months, nothing rebuts it, and it breaks continuous residence. He can file 4 years and 6 months after he returns: 2030-11-02.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "dropping the departure that has no return"
+        },
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "treating the open departure as an unverified past trip"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2026-05-02",
+          "why": "counting the trip only as days abroad from the review date, not as an absence"
+        }
+      ]
+    },
+    "C-1028": {
+      "title": "CBP's amended response",
+      "story": "CBP's first response (2026-02-02) printed her 2024 return from Spain as 09/30/2024, which would make a seven-month absence. CBP then sent an amended response, CBP-2026-01028-A1.pdf, which says it replaces the first one and gives 04/30/2024. Only the latest response counts (SOP 2). The CMS still lists only the first one. She was away for a month and a half and can file today.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2029-03-30",
+          "why": "reading only the response named in the CMS"
+        }
+      ]
+    },
+    "C-1029": {
+      "title": "A changed plan, with the old one quoted below",
+      "story": "In January he emailed that he would be in Lima from 2026-03-05 to 2026-04-20, and the CMS recorded that trip. On 2026-02-24 he replied that the conference was shortened: now 2026-03-25 to 2026-04-02. His reply quotes the old dates below. A later statement replaces the earlier one, and quoted text is not a new statement (SOP 2). Continuous residence is met on 2026-03-12, before he leaves, so he can file then.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2026-04-20",
+          "why": "keeping the old plan from the CMS, the first email or the quoted text"
+        }
+      ]
+    },
+    "C-1030": {
+      "title": "A separation in everyday words",
+      "story": "She has been married to a US citizen by birth since 2021, which would allow the 3-year basis today. But her email says her husband moved out in November and they have kept separate apartments since. It never uses the word \"separated\", but they no longer live together in marital union, so the 3-year basis is unavailable (SOP 8). On the 5-year basis she can file on 2027-01-01.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW, 3-year",
+          "why": "missing the separation because the email doesn't say \"separated\""
+        }
+      ]
+    },
+    "C-1031": {
+      "title": "The husband's oath date is in the firm's records",
+      "story": "Her husband is a naturalized citizen, but her file doesn't give the date. He was the firm's client (C-1032): his closed N-400 matter says he took the oath of allegiance on 2023-02-20; the matter was closed on 2023-03-14. SOP 8 says to use the oath date from the firm's records. Three years after it is 2026-02-20, so she can file today on the 3-year basis.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2026-11-17",
+          "why": "not finding the spouse's naturalization date"
+        },
+        {
+          "answer": "SCHEDULE, 3-year, 2026-03-14",
+          "why": "using the date the matter was closed instead of the oath date"
+        }
+      ]
+    },
+    "C-1032": {
+      "title": "A former client, not in the queue",
+      "story": "He is C-1031's husband, naturalized through the firm in 2023. He isn't in the review queue; his closed N-400 matter is where his wife's 3-year date comes from.",
+      "wrong": [
+        {
+          "answer": "Any decision for C-1032",
+          "why": "deciding every client in the CMS instead of the review queue"
+        }
       ]
     }
   },
   "mistakes": [
-    {"id": "i751", "label": "C-1002: green-card date taken from the I-751 notice", "client": "C-1002",
-     "set": {"status": "SCHEDULE", "basis": "3_YEAR_MARRIAGE", "earliest_filing_date": "2026-06-22"}},
-    {"id": "hotel", "label": "C-1003: hotel receipt accepted as proof of travel", "client": "C-1003",
-     "set": {"status": "FILE_NOW", "basis": "5_YEAR", "earliest_filing_date": "2026-03-02"}},
-    {"id": "lease", "label": "C-1007: lease counted, though it starts after she left", "client": "C-1007",
-     "set": {"status": "FILE_NOW", "basis": "5_YEAR", "earliest_filing_date": "2026-03-02"}},
-    {"id": "one_year", "label": "C-1008: 4 years and 1 day without rebuttal documents", "client": "C-1008",
-     "set": {"status": "SCHEDULE", "basis": "5_YEAR", "earliest_filing_date": "2026-10-11"}},
-    {"id": "separation", "label": "C-1010: the separation email missed", "client": "C-1010",
-     "set": {"status": "FILE_NOW", "basis": "3_YEAR_MARRIAGE", "earliest_filing_date": "2026-03-02"}},
-    {"id": "distractor", "label": "C-1015 added, though not in the review queue", "client": "C-1015",
-     "add": {"client_id": "C-1015", "status": "SCHEDULE", "basis": "5_YEAR", "earliest_filing_date": "2028-01-03"}},
-    {"id": "duplicate", "label": "One decision written with a duplicate JSON key", "client": "C-1001", "duplicate_key": "status"}
+    {
+      "id": "i751",
+      "label": "C-1002: green-card date taken from the I-751 notice",
+      "client": "C-1002",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "3_YEAR_MARRIAGE",
+        "earliest_filing_date": "2026-06-22"
+      }
+    },
+    {
+      "id": "hotel",
+      "label": "C-1003: hotel receipt accepted as proof of travel",
+      "client": "C-1003",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "lease",
+      "label": "C-1007: lease counted, though it starts after she left",
+      "client": "C-1007",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "one_year",
+      "label": "C-1008: 4 years and 1 day without rebuttal documents",
+      "client": "C-1008",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-10-11"
+      }
+    },
+    {
+      "id": "separation",
+      "label": "C-1010: the separation email missed",
+      "client": "C-1010",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "3_YEAR_MARRIAGE",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "joint",
+      "label": "C-1021: husband's trip counted from the joint FOIA response",
+      "client": "C-1021",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "3_YEAR_MARRIAGE",
+        "earliest_filing_date": "2027-03-14"
+      }
+    },
+    {
+      "id": "ddmm",
+      "label": "C-1022: itinerary dates read as MM/DD/YYYY",
+      "client": "C-1022",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "open_exit",
+      "label": "C-1027: the departure with no return dropped",
+      "client": "C-1027",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "amended",
+      "label": "C-1028: CBP's first response used, not the amended one",
+      "client": "C-1028",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2029-03-30"
+      }
+    },
+    {
+      "id": "quoted",
+      "label": "C-1029: the old plan quoted in the reply kept",
+      "client": "C-1029",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-04-20"
+      }
+    },
+    {
+      "id": "distractor",
+      "label": "C-1015 added, though not in the review queue",
+      "client": "C-1015",
+      "add": {
+        "client_id": "C-1015",
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2028-01-03"
+      }
+    },
+    {
+      "id": "duplicate",
+      "label": "One decision written with a duplicate JSON key",
+      "client": "C-1001",
+      "duplicate_key": "status"
+    }
   ]
 }
