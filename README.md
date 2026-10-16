@@ -206,3 +206,41 @@ demo/                        the optional explorer app
 [DESIGN.md](DESIGN.md) covers how the task handles human review, guardrails, data management, speed and cost, and bounded agent loops, plus the sources behind every rule and a plan for turning it into a production tool:
 
 ![Production plan](docs/production-plan.svg)
+
+## Iteration log
+
+1. **2026-10-15, rubric fix.** The first implementation-rubric review failed one criterion, `task_toml_schema`: `[environment]` set `network_mode = "public"`, which is not in the rubric's list of task.toml fields. The line was removed. It was Harbor's default, so the task runs the same. After the fix: 28/28 static checks, oracle 1.0, nop 0.0, rubric 32 pass and 3 not applicable.
+2. **2026-10-15, v1 (15 clients), first standard trials: all 3 passed, in about 5 minutes each.** Job `run-claude-opus-5-5`, Claude Code with `anthropic/claude-opus-5-5` at max effort, `-k 3 -n 3`.
+
+   | Trial | Reward | Verifier tests | Agent time |
+   |---|---|---|---|
+   | `n400-filing-review__sHSmhQX` | 1.0 | 18 / 18 | 5.4 min |
+   | `n400-filing-review__8x27Zzi` | 1.0 | 18 / 18 | 5.9 min |
+   | `n400-filing-review__gnzro3R` | 1.0 | 18 / 18 | 7.3 min |
+
+   All three were legitimate solves. The agent read the SOP, dumped the CMS tables, read the raw emails with their attachments, and applied the rules in one script. The task was fair but too easy: every fact was cleanly readable from SQL and plain-text email. Following the brief, the task was hardened before any further trials (next entry).
+3. **Infrastructure rerun.** An earlier smoke trial (`smoke-claude-opus-5-5`) never started: Harbor's preflight `docker info` took 84 s against its 10 s limit while Docker Desktop was starting. It is not counted.
+4. **2026-10-15, v2 hardening (21 clients).** Because v1 was solved in minutes, the evidence was made to look and behave like what a paralegal actually receives. Every rule is still in the SOP, and nothing in instruction.md hints at a trap.
+   - **CBP FOIA responses as PDFs.** The `cbp_events` table and the coverage columns are gone from the CMS. Only `cbp_foia_requests` remains, with each client's request number. CBP's answer is now one text-based PDF per request in `/app/review/foia/`: a cover letter that states the coverage window in words, then the entries and exits, newest first, with MM/DD/YYYY dates, over several pages with the header repeated. Two responses (C-1002, C-1021) are joint responses for a married couple, and counting the spouse's rows changes the answer.
+   - **Real-looking email.** Two clients (C-1010, C-1020) write from addresses that aren't in the CMS, signed with their full name and A-number. One trip (C-1022) is proven only by a European carrier's itinerary PDF attached to an email. It prints dates as DD/MM/YYYY, says so in its header, and uses dates where both readings are valid.
+   - **Six new clients whose rules interact** (C-1017 to C-1022): a rebutted 13-month absence (the 4 years and 1 day branch), a rebutted absence followed by an unrebutted one, a trip that starts before the LPR date, a NY to NJ to NY move, a naturalized spouse's 3 years falling inside a planned trip, and the day-first itinerary.
+   - **Keeping traps honest.** For each new trap, `tests/rules.py` computed what the likely misreading gives, and a trap was kept only if that changes the answer. `solution/solve.py` stays independent: it reads only what the agent sees, including the PDFs, with the standard library. It agrees with `rules.py` on all 21 clients.
+   - **Checked before any new trial:** the renderer gives byte-identical output on reruns (34 files); 28/28 static checks; oracle 1.0 (24/24 tests) and nop 0.0 in Docker.
+   - **Instruction and SOP changes:** the one line of instruction.md that lists the record folders now includes `/app/review/foia/`. SOP section 2 now covers the FOIA PDFs, joint responses, matching email by signature, and printed date formats.
+5. **2026-10-15, v2 trials: all 3 standard trials passed again; the cheat trial scored 0.** Rubric review `rubric-review-v2`: 33 pass, 2 not applicable, 0 fail. Job `run-v2-claude-opus-5-5`:
+
+   | Trial | Reward | Verifier tests | Agent time |
+   |---|---|---|---|
+   | `n400-filing-review__9RN5y28` | 1.0 | 24 / 24 | 8.7 min |
+   | `n400-filing-review__JSvF8aQ` | 1.0 | 24 / 24 | 7.5 min |
+   | `n400-filing-review__WcBE4hx` | 1.0 | 24 / 24 | 8.8 min |
+
+   All three were legitimate: each wrote its own PDF reader, matched emails by signature, kept only the client's rows in joint responses and read the itinerary as DD/MM/YYYY. The cheat trial (`cheat-v2-claude-opus-5-5`) looked for a way around the verifier, found none, declined to fabricate output and scored 0. The hardening added only a few minutes, so the task was hardened again (next entry).
+6. **2026-10-15, v3 (30 clients): the shortcuts the v2 solvers relied on now give wrong answers.** The three v2 solver scripts were read to see what they assumed that the SOP doesn't promise. All three typed the email facts in by hand, opened exactly one FOIA response per client (the one named in the CMS), dropped or mishandled a CBP departure with no return, took the spouse's naturalization date only from `marriages`, and merged a CMS planned trip with an email one only when the dates were equal. Nine clients (C-1023 to C-1031) and one former client (C-1032, not in the queue) were added so that each of these readings, and the other common ones, changes an answer. The SOP still fixes exactly one right answer for each. Every existing client's answer is unchanged.
+   - **Calendar lengths.** A 184-day absence that is exactly six calendar months (C-1023), and a 365-day absence across February 29 that is less than a year (C-1024). The SOP now defines lengths of time once (new section 10): calendar months and years, never day counts.
+   - **Planned and current trips.** A planned trip that covers the continuous-residence date and leaves the client short of days present on her return date (C-1025). A client who is still abroad on the review date and emailed his booked return (C-1027): the whole absence is over six months. The SOP now says a CBP departure with no later arrival is a current trip that ends on the return date the client states, and that planned and current trips are absences for continuous residence too.
+   - **An announced move** to Pennsylvania after the review date (C-1026). The SOP now says a move announced for a later date counts from that date.
+   - **Superseded evidence.** CBP's amended FOIA response (`-A1`) replaces a first response with a wrong date, and the CMS still lists only the first (C-1028). A reply that moves a planned trip quotes the old dates below the new ones (C-1029). The SOP now says only the latest CBP response counts, a later statement replaces the earlier one in the CMS or in email, and quoted text is not a new statement.
+   - **Everyday wording and routine mail.** A separation stated as "moved out… separate apartments", never "separated" (C-1030), plus six ordinary messages with dates but no facts (appointments, invoices, portal and billing notices).
+   - **The firm's own records.** A spouse's naturalization date that only the firm's closed N-400 matter for the husband, a former client, gives; the matter's closing date is a different date (C-1031). The CMS has a new `matters` table, and SOP section 8 says to use the oath date from the firm's records.
+   - **Checked before any new trial:** the renderer gives byte-identical output on reruns (cms.sql, 21 emails, 33 FOIA PDFs); `solve.py` matches `rules.py` on all 30 clients; 28/28 static checks; oracle 1.0 (33/33 tests) and nop 0.0 in Docker; the explorer's `--check` passes, with notes and one-mistake checks for the new clients. instruction.md is unchanged (no new folder).

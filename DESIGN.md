@@ -30,7 +30,7 @@ This note covers how the task handles the things every agent system has to get r
 - The reward is 0 or 1, never partial.
 - Editing anything under `/app/review` can't change the expected answers. They're computed from the verifier's own copy of the facts.
 
-**Against cheating:** the `/cheat` trials run Terminal-Bench's red-team prompt, which tells the agent to game the verifier instead of solving the task. Both must score 0. Results are in README.md.
+**Against cheating:** the `/cheat` trial runs Terminal-Bench's red-team prompt, which tells the agent to game the verifier instead of solving the task. It must score 0. Results are in README.md.
 
 ## 3. Data management
 
@@ -49,7 +49,7 @@ This note covers how the task handles the things every agent system has to get r
 - **Correctness is graded, not speed.** Agents get 14,400 seconds. The verifier runs in well under a second, and the reference solution in about a second.
 - **The task rewards the same split I'd use in a real system:** a model for reading messy records, and plain code for rules and date arithmetic, which is instant, exact and testable.
 - **The oracle's search is cheap.** It looks for the earliest filing date day by day, but it starts at the latest hard date and stops after 8 years. The hard dates are the continuous-residence date, 3 months in the state, and the marriage dates.
-- **Trials run in parallel.** Each job runs 3 attempts at once, and both agents run at the same time, so the full set takes hours rather than a day.
+- **Trials run in parallel.** The standard job runs its 3 attempts at once, so the set takes hours rather than a day.
 
 ## 5. One declarative file drives everything
 
@@ -68,7 +68,7 @@ This note covers how the task handles the things every agent system has to get r
 - **Where each fact comes from.** Trip dates follow the order of trust in SOP 4.3: CBP FOIA entry and exit records (`cbp_events`, with coverage windows in `cbp_foia`), then carrier documents (the airline itineraries in the CMS `documents` table and the bus e-ticket attached to one email; the hotel receipt attached to another email doesn't count), then the client's own statements (questionnaire and email). The other rows in `documents` (an employment letter, two tax returns and a lease) are rebuttal evidence for absences over six months (SOP 5.2 and 5.4). The permanent-resident date comes from the card scan, else the I-485 notice, and never from the I-751 notice or the questionnaire (SOP 3). Client email overrides the CMS only for moves, separations, trips and planned travel (SOP 2).
 - **Where each answer comes from.** Every expected decision is computed by `tests/rules.py` from `tests/case_facts.json`. Nothing in the answer key is typed in by hand.
 - **The law behind the rules.** INA 316 (the 5-year basis), INA 319 (the 3-year basis for spouses of US citizens), 8 CFR 316.5 (continuous residence and absences) and the [USCIS Policy Manual, Vol. 12, Part D, Ch. 3](https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-3) (the waiting periods after a break), restated as the firm's SOP. The clients and records are synthetic.
-- **The benchmark rules followed.** Terminal-Bench 3's contributing guide, task review automation docs and CI run defaults, run with Harbor 0.23.1.dev202609170426, the version TB3's CI pins:
+- **The benchmark rules followed.** Terminal-Bench 3's contributing guide and task review automation docs, run with Harbor 0.23.1.dev202609170426, the version TB3's CI pins. The trials used the models in Klavis's brief (Claude Code with Opus 5.5 at max effort) rather than the CI defaults, which Xiangkai confirmed is fine. Sources:
   - [CONTRIBUTING.md](https://github.com/harbor-framework/terminal-bench/blob/main/CONTRIBUTING.md)
   - [docs/TASK_REVIEW_AUTOMATION.md](https://github.com/harbor-framework/terminal-bench/blob/main/docs/TASK_REVIEW_AUTOMATION.md)
   - [.github/harbor-run-defaults.yml](https://github.com/harbor-framework/terminal-bench/blob/main/.github/harbor-run-defaults.yml)
