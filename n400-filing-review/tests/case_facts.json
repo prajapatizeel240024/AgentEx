@@ -1,5 +1,5 @@
 {
-  "_note": "Ground truth for the verifier (goes in tests/ only, never in the agent image). Rendered into environment/data/review by tools/render_case_data.py.",
+  "_note": "Ground truth for the verifier (goes in tests/ only, never in the agent image). Rendered into environment/data/review by demo/backend/render_case_data.py.",
   "review_date": "2026-03-02",
   "cms_export_date": "2026-02-16",
   "clients": [

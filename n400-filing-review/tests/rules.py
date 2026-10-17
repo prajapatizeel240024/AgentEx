@@ -3,8 +3,9 @@
 
 The verifier uses this module to compute the expected decision for every client
 in the review queue from /tests/case_facts.json, the structured facts that were
-rendered into /app/review for the agent (CMS rows, emails, attachments). It is
-written independently of solution/solve.py, which works from the rendered files.
+rendered into /app/review for the agent (CMS rows, emails, attachments and CBP
+FOIA PDFs). It is written independently of solution/solve.py, which works from
+the rendered files.
 """
 import calendar
 import json
