@@ -84,7 +84,7 @@ The explorer app in `demo/` shows the task live: the right answer for every clie
 
 ![Explorer: the task page](app-task.png)
 
-*The task page: the 15 clients in the review queue, each with the right answer from the verifier's own rules.*
+*The task page: the review queue of 36 clients (the first 15 shown), each with the right answer from the verifier's own rules.*
 
 ![Explorer: client C-1007](app-client.png)
 
