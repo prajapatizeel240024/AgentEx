@@ -65,7 +65,7 @@ It must write one decision per queued client to `/app/output/filing_review.json`
 }
 ```
 
-`status` is `FILE_NOW`, `SCHEDULE` or `REQUEST_EVIDENCE`. `basis` is `5_YEAR` or `3_YEAR_MARRIAGE` (the spouse of a US citizen). The full instruction is in [instruction.md](tasks/n400-filing-review/instruction.md).
+`status` is `FILE_NOW`, `SCHEDULE` or `REQUEST_EVIDENCE`. `basis` is `5_YEAR` or `3_YEAR_MARRIAGE` (the spouse of a US citizen). The full instruction is in [instruction.md](n400-filing-review/instruction.md).
 
 ## Why it's hard
 
@@ -136,7 +136,7 @@ FILE_NOW rows have the review date, 2026-03-02, as their filing date. In total: 
 - **Strict parsing.** Duplicate JSON keys, extra or missing fields, extra or missing clients, and a basis on a REQUEST_EVIDENCE row all fail.
 - **Tamper-proof answers.** Editing anything under `/app/review` can't change the expected answers, which are computed from the verifier's own copy of the facts.
 - **Two independent implementations agree.** `tests/rules.py` works from the structured facts; `solution/solve.py` works only from the rendered database, email and FOIA PDFs. They agree on all 36 clients, so the agent's records contain exactly the facts the answers depend on.
-- **One source of truth.** `tools/render_case_data.py` renders the agent's records from `tests/case_facts.json`, deterministically.
+- **One source of truth.** `demo/backend/render_case_data.py` renders the agent's records from `tests/case_facts.json`, deterministically.
 
 ## Explore the task
 
@@ -168,7 +168,7 @@ You need Docker, Python 3.11 or newer and [uv](https://docs.astral.sh/uv/). On W
 uv tool install "harbor==0.23.1.dev202609170426"   # the version TB3 CI pins
 git clone https://github.com/harbor-framework/terminal-bench terminal-bench-3
 cd terminal-bench-3
-rsync -a --exclude .DS_Store /path/to/AgentEx/tasks/n400-filing-review/ tasks/n400-filing-review/
+rsync -a --exclude .DS_Store /path/to/AgentEx/n400-filing-review/ tasks/n400-filing-review/
 export TASK=tasks/n400-filing-review
 ```
 
@@ -212,32 +212,35 @@ Each failing trial's `verifier/ctrf.json` names the clients it got wrong (`test_
 **5. Regenerate the records** after changing `tests/case_facts.json`:
 
 ```bash
-python3 tools/render_case_data.py tasks/n400-filing-review   # from this repo's root
+python3 demo/backend/render_case_data.py n400-filing-review   # from this repo's root
 ```
 
-Then check that `solve.py` still agrees with `rules.py` (`python3 demo/backend/server.py --check` does this), and rerun the static checks, oracle and nop.
+Then check that `solve.py` still agrees with `rules.py` (`python3 demo/backend/server.py --check` does this), copy the task into the TB3 checkout again (the `rsync` line in step 1), and rerun the static checks, oracle and nop.
 
 ## Repository layout
 
 ```
-README.md                    this report
-DESIGN.md                    design notes: human in the loop, guardrails, data, speed and cost, production plan
-docs/                        3 diagrams and 6 explorer screenshots
-tasks/n400-filing-review/    the task (TB3 format)
-  README.md                  the task's metadata and its four required explanation sections
-  instruction.md             what the agent is told
-  task.toml                  timeouts and resources: agent 4 h, verifier 300 s, 1 CPU, 2 GB
-  environment/               the agent's image: Dockerfile and data/review (cms.sql, mail/, foia/, sop/)
-  solution/                  the reference solution (solve.sh, solve.py)
-  tests/                     the separate verifier: Dockerfile, test.sh, test_outputs.py, rules.py, case_facts.json
-tools/render_case_data.py    renders the agent's records from tests/case_facts.json
-demo/                        the optional explorer app
-results/summary.json         trial results for the explorer's "What's done" page
+README.md                       this report
+n400-filing-review/             the task (TB3 format)
+  README.md                     the task's metadata and its four required explanation sections
+  instruction.md                what the agent is told
+  task.toml                     timeouts and resources: agent 4 h, verifier 300 s, 1 CPU, 2 GB
+  environment/                  the agent's image: Dockerfile and data/review (cms.sql, mail/, foia/, sop/)
+  solution/                     the reference solution (solve.sh, solve.py)
+  tests/                        the separate verifier: Dockerfile, test.sh, test_outputs.py, rules.py, case_facts.json
+demo/                           the optional explorer app
+  README.md                     how to run it, its flags and the results.json format
+  backend/                      the server and its checks (server.py, engine.py, traps.json)
+  backend/render_case_data.py   renders the agent's records from tests/case_facts.json
+  frontend/                     the page: HTML, CSS and JavaScript, no build step, and its fonts
+  results.json                  trial results for the explorer's "What's done" page
+docs/                           3 diagrams and 6 explorer screenshots
+  DESIGN.md                     design notes: human in the loop, guardrails, data, speed and cost, production plan
 ```
 
 ## Design notes
 
-[DESIGN.md](DESIGN.md) covers how the task handles human review, guardrails, data management, speed and cost, and bounded agent loops, plus the sources behind every rule and a plan for turning it into a production tool:
+[docs/DESIGN.md](docs/DESIGN.md) covers how the task handles human review, guardrails, data management, speed and cost, and bounded agent loops, plus the sources behind every rule and a plan for turning it into a production tool:
 
 ![Production plan](docs/production-plan.svg)
 

@@ -30,12 +30,12 @@ This note covers how the task handles the things every agent system has to get r
 - The reward is 0 or 1, never partial.
 - Editing anything under `/app/review` can't change the expected answers. They're computed from the verifier's own copy of the facts.
 
-**Against cheating:** the `/cheat` trial runs Terminal-Bench's red-team prompt, which tells the agent to game the verifier instead of solving the task. It must score 0. Results are in README.md.
+**Against cheating:** the `/cheat` trial runs Terminal-Bench's red-team prompt, which tells the agent to game the verifier instead of solving the task. It must score 0. Results are in [README.md](../README.md).
 
 ## 3. Data management
 
 - **One source of truth.** `tests/case_facts.json` holds every fact for 16 clients: 15 in the review queue, plus 1 who isn't in the queue to check that the agent leaves them out.
-- **One renderer.** `tools/render_case_data.py` turns that file into what the agent sees:
+- **One renderer.** `demo/backend/render_case_data.py` turns that file into what the agent sees:
   - the case database export (`cms.sql`, built into `cms.sqlite` when the image is built)
   - 7 client emails, 2 of them with attachments
 
@@ -76,33 +76,33 @@ This note covers how the task handles the things every agent system has to get r
 
 ## 8. Diagrams
 
-![How the task works](docs/how-it-works.svg)
-![How one decision is made](docs/decision-flow.svg)
-![Production plan](docs/production-plan.svg)
+![How the task works](how-it-works.svg)
+![How one decision is made](decision-flow.svg)
+![Production plan](production-plan.svg)
 
 The explorer app in `demo/` shows the task live: the right answer for every client, the SOP worked step by step, and the real verifier run on any output file. Run it with `python3 demo/backend/server.py`.
 
-![Explorer: the task page](docs/app-task.png)
+![Explorer: the task page](app-task.png)
 
 *The task page: the 15 clients in the review queue, each with the right answer from the verifier's own rules.*
 
-![Explorer: client C-1007](docs/app-client.png)
+![Explorer: client C-1007](app-client.png)
 
 *Client C-1007: what the case tests, what each misreading gives, the timeline, the SOP worked step by step, and the records the agent sees.*
 
-![Explorer: client C-1003's email](docs/app-client-email.png)
+![Explorer: client C-1003's email](app-client-email.png)
 
 *Client C-1003 with the email tab open: her email gives the departure date, but the only attachment is a hotel receipt, which isn't a carrier document. The trip stays unverified, so the right answer is REQUEST_EVIDENCE.*
 
-![Explorer: the checker on the oracle's answers](docs/app-checker-oracle.png)
+![Explorer: the checker on the oracle's answers](app-checker-oracle.png)
 
 *The checker running the real verifier on the oracle's answers: 18 of 18 tests pass, so the reward is 1.*
 
-![Explorer: the checker](docs/app-checker.png)
+![Explorer: the checker](app-checker.png)
 
 *The checker: the oracle's answers with one mistake (for C-1008, using 4 years and 1 day without rebuttal documents) fail 1 of 18 verifier tests, so the reward is 0.*
 
-![Explorer: what's done](docs/app-done.png)
+![Explorer: what's done](app-done.png)
 
 *What's done: the checks the app runs with the task's own code, and where each part of the assignment stands after the v4 trials.*
 

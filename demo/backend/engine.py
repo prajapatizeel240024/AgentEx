@@ -6,8 +6,8 @@ It loads the task folder read-only and runs the task's own code, unchanged:
 - tests/rules.py          the verifier's reference rules (the expected decisions)
 - solution/solve.py       the oracle, which reads only the files the agent gets
 - tests/test_outputs.py   the real verifier tests
-- tools/render_case_data.py, if found, to show the agent's records were rendered
-                          from the ground truth
+- render_case_data.py     the renderer next to this file, if found, to show the agent's
+                          records were rendered from the ground truth
 
 Nothing is written into the task folder. The CMS export is loaded into an in-memory
 SQLite database, and Python is told not to write bytecode caches.
@@ -70,7 +70,6 @@ def find_task(explicit=None):
     candidates += [
         demo.parent / "n400-filing-review",
         demo.parent / "tasks" / "n400-filing-review",
-        Path.home() / "Desktop" / "klavis-tb3-kit" / "n400-filing-review",
     ]
     for c in candidates:
         if (c / "tests" / "rules.py").is_file() and (c / "solution" / "solve.py").is_file():
@@ -78,16 +77,6 @@ def find_task(explicit=None):
     tried = "\n  ".join(str(c) for c in candidates)
     raise SystemExit("Could not find the n400-filing-review task folder. Tried:\n  " + tried
                      + "\nRun with --task /path/to/n400-filing-review")
-
-
-def find_up(start, relative, levels=3):
-    """Look for a file at start/relative, then one and two folders up."""
-    here = Path(start)
-    for _ in range(levels):
-        if (here / relative).exists():
-            return here / relative
-        here = here.parent
-    return None
 
 
 def load_module(name, path):
@@ -193,9 +182,10 @@ class Task:
         self.verifier = load_verifier(self.dir, self.rules)
         self.traps = json.loads((HERE / "traps.json").read_text(encoding="utf-8"))
 
-        diagram = find_up(self.dir.parent, "docs/how-it-works.svg")
-        self.docs_dir = diagram.parent if diagram else None
-        self.renderer_path = find_up(self.dir.parent, "tools/render_case_data.py")
+        docs = HERE.parent.parent / "docs"
+        self.docs_dir = docs if (docs / "how-it-works.svg").is_file() else None
+        renderer = HERE / "render_case_data.py"
+        self.renderer_path = renderer if renderer.is_file() else None
         self.results_path = self._find_results(results_path)
 
         self.mail = self._read_mail()
@@ -230,7 +220,6 @@ class Task:
                 "file": path.name,
                 "client_id": owner,
                 "from": str(msg["From"]),
-                "to": str(msg["To"]),
                 "date": str(msg["Date"]),
                 "subject": str(msg["Subject"]),
                 "body": msg.get_body(preferencelist=("plain",)).get_content().strip(),
@@ -420,8 +409,7 @@ class Task:
             else:
                 evidence = "dates only from the client's {}".format(st[2] if st else "word")
             days = (ret - dep).days - 1 if dep else None
-            trip_rows.append({"depart": dep.isoformat() if dep else None, "return": ret.isoformat(),
-                              "days_abroad": days, "verified": ok, "evidence": evidence})
+            trip_rows.append({"depart": dep.isoformat() if dep else None, "return": ret.isoformat(), "verified": ok})
             lines.append({"text": "{} to {}{}: {}".format(dep or "?", ret, "" if days is None else " ({} days abroad)".format(days), evidence),
                           "tag": "verified" if ok else "unverified"})
         for dep, ret, ok in all_trips:
@@ -616,8 +604,6 @@ class Task:
         return out
 
     def _finish(self, c, steps, decision, lpr, trip_rows, bases, planned):
-        r = self.rules
-        review = r.REVIEW_DATE
         if decision["status"] == "REQUEST_EVIDENCE":
             text = "REQUEST_EVIDENCE: no basis and no date until the client sends more evidence"
         else:
@@ -636,9 +622,9 @@ class Task:
         mine = steps[-1]["result"].split(":")[0]
         if mine != decision["status"]:
             self.trace_problems.append("{}: trace says {}, rules.py says {}".format(c["client_id"], mine, decision["status"]))
-        return {"steps": steps, "timeline": self._timeline(c, lpr, trip_rows, planned, decision, bases)}
+        return {"steps": steps, "timeline": self._timeline(lpr, trip_rows, planned, decision, bases)}
 
-    def _timeline(self, c, lpr, trip_rows, planned, decision, bases):
+    def _timeline(self, lpr, trip_rows, planned, decision, bases):
         r = self.rules
         review = r.REVIEW_DATE
         filing = r.d(decision["earliest_filing_date"]) if decision["earliest_filing_date"] else None
@@ -656,9 +642,7 @@ class Task:
             dates += window
         start = min(dates + [r.add_years(review, -5).isoformat()])
         end = max(dates)
-        years = 5 if decision["basis"] != "3_YEAR_MARRIAGE" else 3
-        label = "{}-year window before the earliest filing date".format(years) if window else None
-        return {"start": start, "end": end, "markers": markers, "items": items, "window": window, "window_label": label}
+        return {"start": start, "end": end, "markers": markers, "items": items, "window": window}
 
     # ----------------------------------------------------------------- overview and status
 
@@ -687,10 +671,8 @@ class Task:
     def _find_results(self, explicit):
         if explicit:
             return Path(explicit).expanduser()
-        for candidate in (find_up(self.dir.parent, "results/summary.json"), HERE.parent / "results.json"):
-            if candidate and Path(candidate).is_file():
-                return Path(candidate)
-        return None
+        default = HERE.parent / "results.json"
+        return default if default.is_file() else None
 
     def _build_overview(self):
         instruction = (self.dir / "instruction.md").read_text(encoding="utf-8")
@@ -714,9 +696,7 @@ class Task:
         return {
             "instruction": instruction,
             "difficulty": sections.get("Difficulty explanation", ""),
-            "verification": sections.get("Verification explanation", ""),
             "sop": sop,
-            "schema": (self.review_dir / "sop" / "filing_review.schema.json").read_text(encoding="utf-8"),
             "sample_decision": sample,
             "review_date": self.rules.REVIEW_DATE.isoformat(),
             "counts": counts,
@@ -733,7 +713,7 @@ class Task:
         out = []
         for cid, d in self.details.items():
             out.append({"client_id": cid, "name": d["name"], "in_queue": d["in_queue"], "expected": d["expected"],
-                        "agree": d["agree"], "title": d["trap"]["title"]})
+                        "title": d["trap"]["title"]})
         return out
 
     def checks(self):
@@ -775,7 +755,7 @@ class Task:
                         pdfs.append((renderer.render_foia_pdf(c), Path(str(request) + ".pdf")))
                 on_disk = sorted((self.review_dir / "foia").glob("*.pdf"))
                 same_pdf = sorted(p for _, p in pdfs) == on_disk and all(p.read_bytes() == data for data, p in pdfs)
-                add("The agent's records are exactly what tools/render_case_data.py makes from case_facts.json",
+                add("The agent's records are exactly what render_case_data.py makes from case_facts.json",
                     same_sql and same_mail and same_pdf,
                     "cms.sql, {} emails and {} FOIA PDFs compared byte for byte".format(len(emails), len(pdfs)))
             except Exception as exc:  # report, don't crash the app
@@ -791,7 +771,7 @@ class Task:
                 self._overview["clients"], self._overview["queue"]),
              "done" if oracle_ok else "failed", "the oracle scores 1 and an empty run scores 0 in the checks above"),
             ("design", "Design notes and diagrams", "done" if diagrams else "pending",
-             ", ".join(diagrams) if diagrams else "diagrams not found next to the task"),
+             ", ".join(diagrams) if diagrams else "diagrams not found in docs/"),
             ("static_checks", "Terminal-Bench 3 static checks", "pending", "run in Phase 3"),
             ("rubric", "Implementation rubric review", "pending", "run in Phase 3"),
             ("harbor", "Docker build, oracle scores 1 and nop scores 0 in Harbor", "pending", "run in Phase 3"),
@@ -815,11 +795,10 @@ class Task:
     def status(self):
         results = self._results()
         return {"checks": self._checks, "requirements": self.requirements(results),
-                "trials": (results or {}).get("trials", []), "results_error": (results or {}).get("error"),
-                "results_path": str(self.results_path) if self.results_path else None}
+                "trials": (results or {}).get("trials", []), "results_error": (results or {}).get("error")}
 
     def state(self):
         return {"overview": self._overview, "clients": self.summaries(),
-                "mistakes": [{"id": m["id"], "label": m["label"], "client": m["client"]} for m in self.traps["mistakes"]],
+                "mistakes": [{"id": m["id"], "label": m["label"]} for m in self.traps["mistakes"]],
                 "task_dir": _display_path(self.dir)}
 

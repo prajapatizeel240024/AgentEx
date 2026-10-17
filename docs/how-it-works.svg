@@ -38,7 +38,7 @@
   <text x="184" y="127" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">tests/case_facts.json:</tspan><tspan x="184" dy="20">one source of truth (16 synthetic clients)</tspan></text>
 
   <rect x="24" y="208" width="320" height="64" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
-  <text x="184" y="235" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">tools/render_case_data.py:</tspan><tspan x="184" dy="20">deterministic renderer</tspan></text>
+  <text x="184" y="235" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">demo/backend/render_case_data.py:</tspan><tspan x="184" dy="20">deterministic renderer</tspan></text>
 
   <rect x="24" y="316" width="320" height="104" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
   <text x="184" y="343" text-anchor="middle" font-size="15" fill="#111827"><tspan x="184">/app/review:</tspan><tspan x="184" dy="20">cms.sqlite (CMS export),</tspan><tspan x="184" dy="20">mail/ (7 emails, 2 with attachments),</tspan><tspan x="184" dy="20">sop/ (SOP NAT-04 + JSON schema)</tspan></text>
