@@ -11,7 +11,7 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# Firm records for this review cycle: the CMS export (as SQL text), client mail, the SOP.
+# Firm records for this review cycle: the CMS export (as SQL text), client mail, CBP's FOIA responses, the SOP.
 COPY data/review /app/review
 
 # Build the CMS database from its SQL export, then keep only the .sqlite file.

@@ -122,7 +122,7 @@ function renderTask() {
         <ul class="files">
           <li><code>/app/review/cms.sqlite</code><br>The case database export: ${o.clients} clients, ${o.documents} documents on file.</li>
           <li><code>/app/review/foia/</code><br>${o.foia_pdfs} CBP FOIA responses as PDFs: a cover letter with the coverage window, then the entries and exits.</li>
-          <li><code>/app/review/mail/</code><br>${o.emails} client emails, with ${o.attachments} attachments.</li>
+          <li><code>/app/review/mail/</code><br>${o.emails} emails, with ${o.attachments} attachments.</li>
           <li><code>/app/review/sop/</code><br>The firm's procedure (SOP NAT-04) and the output format.</li>
         </ul>
       </div>
