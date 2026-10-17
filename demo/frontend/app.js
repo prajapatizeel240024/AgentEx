@@ -72,7 +72,8 @@ function markdown(md) {
     }
     close();
     if (!line) continue;
-    if (line.startsWith("## ")) html += `<h2>${inline(line.slice(3))}</h2>`;
+    if (line.startsWith("### ")) html += `<h3>${inline(line.slice(4))}</h3>`;
+    else if (line.startsWith("## ")) html += `<h2>${inline(line.slice(3))}</h2>`;
     else if (line.startsWith("# ")) html += `<h1>${inline(line.slice(2))}</h1>`;
     else html += `<p>${inline(line)}</p>`;
   }
@@ -141,7 +142,7 @@ function renderTask() {
 
     <section class="why">
       <h2>Why it's hard</h2>
-      <p>${esc(o.difficulty)}</p>
+      <div class="md">${markdown(o.difficulty)}</div>
     </section>
 
     ${diagram}
