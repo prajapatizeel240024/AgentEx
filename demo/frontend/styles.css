@@ -121,7 +121,7 @@ button.secondary { background: transparent; color: var(--ink); border-color: var
 details.sop { background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 16px 22px; }
 details.sop > summary { cursor: pointer; font-weight: 600; }
 .md { max-width: 76ch; margin-top: 14px; }
-.md h1 { font-size: 1.5rem; } .md h2 { font-size: 1.2rem; margin-top: 1.4rem; }
+.md h1 { font-size: 1.5rem; } .md h2 { font-size: 1.2rem; margin-top: 1.4rem; } .md h3 { margin-top: 1.2rem; }
 .md ul { padding-left: 1.2rem; }
 
 /* ---------- clients view */
