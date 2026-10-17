@@ -155,7 +155,7 @@ python3 demo/backend/server.py --check    # the same checks in the terminal
 | ![Client C-1007](docs/app-client.png) | ![Client C-1003's email](docs/app-client-email.png) |
 | **Client C-1007:** what the case tests, each misreading, the timeline and the SOP worked step by step | **Client C-1003:** the hotel receipt doesn't verify the trip, so the answer is REQUEST_EVIDENCE |
 | ![The checker on the oracle's answers](docs/app-checker-oracle.png) | ![The checker with one mistake](docs/app-checker.png) |
-| **The oracle's answers:** 18 of 18 tests pass, reward 1 | **One mistake on C-1008:** 17 of 18, reward 0 |
+| **The oracle's answers:** 39 of 39 tests pass, reward 1 | **One mistake on C-1008:** 38 of 39, reward 0 |
 
 ![What's done](docs/app-done.png)
 
@@ -248,6 +248,7 @@ docs/                           3 diagrams and 6 explorer screenshots
 ## Known issues
 
 - **A date in a replaced CBP response.** `/app/review/foia/CBP-2026-01028.pdf`, CBP's first response for C-1028, is dated February 2, 2026, but says CBP searched records through February 15, 2026, 13 days later. `tests/case_facts.json` gives that response its own date and records but no search window of its own, so the renderer prints the request's window on both of C-1028's responses. No answer depends on it: only the latest response to a request counts (SOP section 2), and the amended response, `CBP-2026-01028-A1.pdf` (February 20, 2026), gives the same window. Fixing it would change the task data and mean rerunning every check and trial, so it is left as is.
+- **Parts drafted with AI help.** `n400-filing-review/instruction.md` and the Difficulty, Solution and Verification sections of the task README (`n400-filing-review/README.md`) were drafted with AI help, the README sections from the author's notes. TB3 asks for these to be written by hand, so the author will rewrite them if the task goes to TB3.
 
 ## Iteration log
 
