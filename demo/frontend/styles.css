@@ -5,7 +5,6 @@
 @font-face { font-family: "Instrument Sans"; src: url("/fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Libre Caslon Text"; src: url("/fonts/libre-caslon-text-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Libre Caslon Text"; src: url("/fonts/libre-caslon-text-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Libre Caslon Text"; src: url("/fonts/libre-caslon-text-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 
 :root {
   --desk: #edf1ee;        /* green-grey security paper */
@@ -113,7 +112,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 56px; }
 .explain pre.code { font-size: 0.8rem; }
 pre.code { margin: 0 0 12px; padding: 12px 14px; background: var(--desk); border-radius: 8px; overflow-x: auto; line-height: 1.45; }
 .btn, button { font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; border-radius: 8px; padding: 9px 14px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); text-decoration: none; display: inline-block; }
-.btn.secondary, button.secondary { background: transparent; color: var(--ink); border-color: var(--rule); }
+button.secondary { background: transparent; color: var(--ink); border-color: var(--rule); }
 .btn:hover, button:hover { filter: brightness(1.12); }
 .why { max-width: 76ch; margin-bottom: 30px; }
 .diagram { margin: 0 0 30px; background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 18px; }
@@ -157,7 +156,7 @@ details.sop > summary { cursor: pointer; font-weight: 600; }
 .legend { color: var(--ink-2); font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; }
 .legend i { display: inline-block; width: 22px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
 
-ol.steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+ol.steps { list-style: none; padding: 0; margin: 0; }
 .step { position: relative; padding: 0 0 18px 46px; }
 .step::before { content: ""; position: absolute; left: 15px; top: 34px; bottom: 0; width: 2px; background: var(--rule); }
 .step:last-child::before { display: none; }
@@ -173,7 +172,6 @@ ul.lines li { display: grid; grid-template-columns: 104px 1fr; gap: 10px; paddin
 ul.lines li.sub { padding-left: 22px; }
 ul.lines .tag { font-size: 0.74rem; font-weight: 600; text-align: center; border-radius: 999px; padding: 1px 8px; align-self: start; margin-top: 2px; background: var(--rule-2); color: var(--ink-2); }
 ul.lines .t-used .tag, ul.lines .t-verified .tag, ul.lines .t-rebutted .tag { background: var(--tint-green); color: var(--green); }
-ul.lines .t-never .tag, ul.lines .t-ignored .tag, ul.lines .t-not-needed .tag { background: var(--rule-2); color: var(--ink-2); }
 ul.lines .t-unverified .tag, ul.lines .t-break .tag { background: var(--tint-red); color: var(--red); }
 ul.lines .t-planned .tag { background: var(--tint-blue); color: var(--blue); }
 ul.lines .t-info .tag { visibility: hidden; }
@@ -243,7 +241,7 @@ ul.checklist li:first-child { border-top: 0; }
 .pill.done, .pill.pass { background: var(--tint-green); color: var(--green); }
 .pill.pending { background: var(--tint-blue); color: var(--blue); }
 .pill.waiting { background: var(--rule-2); color: var(--ink-2); }
-.pill.failed, .pill.fail { background: var(--tint-red); color: var(--red); }
+.pill.failed, .pill.fail, .pill.not-met { background: var(--tint-red); color: var(--red); }
 ul.checklist .what { font-weight: 600; line-height: 1.35; }
 ul.checklist .detail { grid-column: 2; color: var(--ink-2); font-size: 0.86rem; overflow-wrap: anywhere; }
 table.trials { border-collapse: collapse; width: 100%; font-size: 0.9rem; }

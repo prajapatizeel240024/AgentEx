@@ -6,8 +6,8 @@ It loads the task folder read-only and runs the task's own code, unchanged:
 - tests/rules.py          the verifier's reference rules (the expected decisions)
 - solution/solve.py       the oracle, which reads only the files the agent gets
 - tests/test_outputs.py   the real verifier tests
-- tools/render_case_data.py, if found, to show the agent's records were rendered
-                          from the ground truth
+- render_case_data.py     the renderer next to this file, if found, to show the agent's
+                          records were rendered from the ground truth
 
 Nothing is written into the task folder. The CMS export is loaded into an in-memory
 SQLite database, and Python is told not to write bytecode caches.
@@ -70,7 +70,6 @@ def find_task(explicit=None):
     candidates += [
         demo.parent / "n400-filing-review",
         demo.parent / "tasks" / "n400-filing-review",
-        Path.home() / "Desktop" / "klavis-tb3-kit" / "n400-filing-review",
     ]
     for c in candidates:
         if (c / "tests" / "rules.py").is_file() and (c / "solution" / "solve.py").is_file():
@@ -78,16 +77,6 @@ def find_task(explicit=None):
     tried = "\n  ".join(str(c) for c in candidates)
     raise SystemExit("Could not find the n400-filing-review task folder. Tried:\n  " + tried
                      + "\nRun with --task /path/to/n400-filing-review")
-
-
-def find_up(start, relative, levels=3):
-    """Look for a file at start/relative, then one and two folders up."""
-    here = Path(start)
-    for _ in range(levels):
-        if (here / relative).exists():
-            return here / relative
-        here = here.parent
-    return None
 
 
 def load_module(name, path):
@@ -193,9 +182,10 @@ class Task:
         self.verifier = load_verifier(self.dir, self.rules)
         self.traps = json.loads((HERE / "traps.json").read_text(encoding="utf-8"))
 
-        diagram = find_up(self.dir.parent, "docs/how-it-works.svg")
-        self.docs_dir = diagram.parent if diagram else None
-        self.renderer_path = find_up(self.dir.parent, "tools/render_case_data.py")
+        docs = HERE.parent.parent / "docs"
+        self.docs_dir = docs if (docs / "how-it-works.svg").is_file() else None
+        renderer = HERE / "render_case_data.py"
+        self.renderer_path = renderer if renderer.is_file() else None
         self.results_path = self._find_results(results_path)
 
         self.mail = self._read_mail()
@@ -230,7 +220,6 @@ class Task:
                 "file": path.name,
                 "client_id": owner,
                 "from": str(msg["From"]),
-                "to": str(msg["To"]),
                 "date": str(msg["Date"]),
                 "subject": str(msg["Subject"]),
                 "body": msg.get_body(preferencelist=("plain",)).get_content().strip(),
@@ -376,28 +365,37 @@ class Task:
 
         # 2. Trips (SOP 4)
         foia = c["cbp_foia"]
-        lo, hi = r.d(foia["coverage_from"]), r.d(foia["coverage_to"])
-        cbp_dep = {r.d(e["date"]) for e in c["cbp_events"] if e["type"] == "DEPARTURE"}
-        cbp_arr = {r.d(e["date"]) for e in c["cbp_events"] if e["type"] == "ARRIVAL"}
+        windows, cbp_events = r.cbp_record(c)
+        inside = lambda day: any(a <= day <= b for a, b in windows)
+        cbp_dep = {r.d(e["date"]) for e in cbp_events if e["type"] == "DEPARTURE"}
+        cbp_arr = {r.d(e["date"]) for e in cbp_events if e["type"] == "ARRIVAL"}
         docs = [(r.d(x["depart_date"]), r.d(x["return_date"]), DOC_LABELS.get(x["doc_type"], x["doc_type"]), "CMS documents")
                 for x in c["documents"] if x["doc_type"] in r.CARRIER_TYPES]
-        docs += [(r.d(f["depart"]), r.d(f["return"]), DOC_LABELS.get(f.get("doc_type", ""), "carrier document"), "email attachment")
+        docs += [(r.d(f["depart"]) if f["depart"] else None, r.d(f["return"]), DOC_LABELS.get(f.get("doc_type", ""), "carrier document"), "email attachment")
                  for f in r.email_facts(c, "carrier_doc")]
         stmts = [(r.d(t["depart_date"]), r.d(t["return_date"]), "questionnaire") for t in c["questionnaire_trips"]]
         stmts += [(r.d(f["depart"]), r.d(f["return"]), "email") for f in r.email_facts(c, "trip_statement")]
         all_trips, abroad_since = r.assemble_trips(c)
         trips = [t for t in all_trips if t[0] is None or t[0] >= lpr]
-        lines = [{"text": "CBP coverage window: {} to {} (every arrival is recorded; land departures are not)".format(lo, hi),
-                  "tag": "info"}]
+        lines = [{"text": "CBP coverage window: {} (every arrival is recorded; land departures are not)".format(
+                  " and ".join("{} to {}".format(a, b) for a, b in windows)), "tag": "info"}]
+        for f in r.email_facts(c, "client_foia"):
+            lines.append({"text": "The client emailed CBP's response to their own FOIA request ({}, {} to {}). It counts like ours: its period joins the coverage window, and records both responses list count once (SOP 2)".format(
+                f["request_no"], f["coverage_from"], f["coverage_to"]), "tag": "info"})
+        same_day = sorted({e["date"] for e in cbp_events if sum(x["date"] == e["date"] for x in cbp_events) > 1})
+        for day in same_day:
+            order = " then ".join("an exit" if e["type"] == "DEPARTURE" else "an entry" for e in cbp_events if e["date"] == day)
+            lines.append({"text": "{}: CBP lists {} on the same day. The response lists crossings in the order they happened, so that is their order (SOP 2)".format(
+                day, order), "tag": "info"})
         if "superseded_response" in foia:
             lines.append({"text": "CBP sent an amended response ({}-A1.pdf) on {}. It replaces the response of {}, so only the amended one counts (SOP 2)".format(
                 foia["request_no"], foia["received_on"], foia["superseded_response"]["received_on"]), "tag": "info"})
         trip_rows = []
-        for dep, ret, ok in sorted(trips, key=lambda t: t[1]):
-            inside = lo <= ret <= hi
-            doc = next((x for x in docs if r.near(x[1], ret)), None)
+        for dep, ret, ok in sorted(trips, key=lambda t: (t[1], t[0] or t[1])):
+            in_window = inside(ret)
+            doc = next((x for x in docs if x[0] is not None and r.near(x[1], ret)), None)
             st = next((x for x in stmts if r.near(x[1], ret)), None)
-            if inside and ret in cbp_arr:
+            if in_window and ret in cbp_arr:
                 if ok and dep in cbp_dep:
                     evidence = "CBP departure and arrival"
                 elif ok and doc:
@@ -411,21 +409,27 @@ class Task:
             else:
                 evidence = "dates only from the client's {}".format(st[2] if st else "word")
             days = (ret - dep).days - 1 if dep else None
-            trip_rows.append({"depart": dep.isoformat() if dep else None, "return": ret.isoformat(),
-                              "days_abroad": days, "verified": ok, "evidence": evidence})
+            trip_rows.append({"depart": dep.isoformat() if dep else None, "return": ret.isoformat(), "verified": ok})
             lines.append({"text": "{} to {}{}: {}".format(dep or "?", ret, "" if days is None else " ({} days abroad)".format(days), evidence),
                           "tag": "verified" if ok else "unverified"})
         for dep, ret, ok in all_trips:
             if dep is not None and dep < lpr:
                 lines.append({"text": "{} to {}: before the permanent-resident date, so it doesn't matter (SOP 4.2)".format(dep, ret), "tag": "ignored"})
-        outside_docs = [x for x in docs if not lo <= x[1] <= hi]
+        outside_docs = [x for x in docs if x[0] is not None and not inside(x[1])]
+        for dep, ret, kind, source in docs:
+            if dep is None:
+                lines.append({"text": "The {} ({}) has no leg leaving the United States, so it proves the return on {} but gives no departure date (SOP 4.3)".format(
+                    kind, source, ret), "tag": "ignored"})
+            elif inside(ret) and not any(r.near(ret, a) for a in cbp_arr):
+                lines.append({"text": "{} to {} from the {} ({}): inside CBP coverage but CBP has no arrival near it, so it is disregarded (SOP 4.4)".format(
+                    dep, ret, kind, source), "tag": "ignored"})
         for dep, ret, source in stmts:
-            if lo <= ret <= hi and not any(r.near(ret, a) for a in cbp_arr):
+            if inside(ret) and not any(r.near(ret, a) for a in cbp_arr):
                 lines.append({"text": "{} to {} from the {}: inside CBP coverage but CBP has no arrival near it, so it is disregarded (SOP 4.4)".format(dep, ret, source), "tag": "ignored"})
-            elif not lo <= ret <= hi and any(r.near(ret, x[1]) for x in outside_docs):
+            elif not inside(ret) and any(r.near(ret, x[1]) for x in outside_docs):
                 lines.append({"text": "{} to {} from the {}: the same trip as a carrier document, which wins (SOP 4.5)".format(dep, ret, source), "tag": "ignored"})
         for e in c["emails"]:
-            if e["attachments"] and e["facts"]["kind"] != "carrier_doc":
+            if e["attachments"] and e["facts"]["kind"] not in ("carrier_doc", "client_foia"):
                 for a in e["attachments"]:
                     lines.append({"text": "{} attached to an email is not a carrier document, so it proves nothing (SOP 4.3)".format(a["filename"]), "tag": "ignored"})
         in_cms = {(r.d(p["depart_date"]), r.d(p["return_date"])) for p in c["planned_travel"]}
@@ -600,8 +604,6 @@ class Task:
         return out
 
     def _finish(self, c, steps, decision, lpr, trip_rows, bases, planned):
-        r = self.rules
-        review = r.REVIEW_DATE
         if decision["status"] == "REQUEST_EVIDENCE":
             text = "REQUEST_EVIDENCE: no basis and no date until the client sends more evidence"
         else:
@@ -620,9 +622,9 @@ class Task:
         mine = steps[-1]["result"].split(":")[0]
         if mine != decision["status"]:
             self.trace_problems.append("{}: trace says {}, rules.py says {}".format(c["client_id"], mine, decision["status"]))
-        return {"steps": steps, "timeline": self._timeline(c, lpr, trip_rows, planned, decision, bases)}
+        return {"steps": steps, "timeline": self._timeline(lpr, trip_rows, planned, decision, bases)}
 
-    def _timeline(self, c, lpr, trip_rows, planned, decision, bases):
+    def _timeline(self, lpr, trip_rows, planned, decision, bases):
         r = self.rules
         review = r.REVIEW_DATE
         filing = r.d(decision["earliest_filing_date"]) if decision["earliest_filing_date"] else None
@@ -640,9 +642,7 @@ class Task:
             dates += window
         start = min(dates + [r.add_years(review, -5).isoformat()])
         end = max(dates)
-        years = 5 if decision["basis"] != "3_YEAR_MARRIAGE" else 3
-        label = "{}-year window before the earliest filing date".format(years) if window else None
-        return {"start": start, "end": end, "markers": markers, "items": items, "window": window, "window_label": label}
+        return {"start": start, "end": end, "markers": markers, "items": items, "window": window}
 
     # ----------------------------------------------------------------- overview and status
 
@@ -671,10 +671,8 @@ class Task:
     def _find_results(self, explicit):
         if explicit:
             return Path(explicit).expanduser()
-        for candidate in (find_up(self.dir.parent, "results/summary.json"), HERE.parent / "results.json"):
-            if candidate and Path(candidate).is_file():
-                return Path(candidate)
-        return None
+        default = HERE.parent / "results.json"
+        return default if default.is_file() else None
 
     def _build_overview(self):
         instruction = (self.dir / "instruction.md").read_text(encoding="utf-8")
@@ -698,9 +696,7 @@ class Task:
         return {
             "instruction": instruction,
             "difficulty": sections.get("Difficulty explanation", ""),
-            "verification": sections.get("Verification explanation", ""),
             "sop": sop,
-            "schema": (self.review_dir / "sop" / "filing_review.schema.json").read_text(encoding="utf-8"),
             "sample_decision": sample,
             "review_date": self.rules.REVIEW_DATE.isoformat(),
             "counts": counts,
@@ -717,7 +713,7 @@ class Task:
         out = []
         for cid, d in self.details.items():
             out.append({"client_id": cid, "name": d["name"], "in_queue": d["in_queue"], "expected": d["expected"],
-                        "agree": d["agree"], "title": d["trap"]["title"]})
+                        "title": d["trap"]["title"]})
         return out
 
     def checks(self):
@@ -759,7 +755,7 @@ class Task:
                         pdfs.append((renderer.render_foia_pdf(c), Path(str(request) + ".pdf")))
                 on_disk = sorted((self.review_dir / "foia").glob("*.pdf"))
                 same_pdf = sorted(p for _, p in pdfs) == on_disk and all(p.read_bytes() == data for data, p in pdfs)
-                add("The agent's records are exactly what tools/render_case_data.py makes from case_facts.json",
+                add("The agent's records are exactly what render_case_data.py makes from case_facts.json",
                     same_sql and same_mail and same_pdf,
                     "cms.sql, {} emails and {} FOIA PDFs compared byte for byte".format(len(emails), len(pdfs)))
             except Exception as exc:  # report, don't crash the app
@@ -771,10 +767,11 @@ class Task:
         diagrams = self._overview["diagrams"]
         oracle_ok = all(c["ok"] for c in self._checks[:2])
         items = [
-            ("task", "The task: instruction, SOP, records for 16 synthetic clients, solution and verifier",
+            ("task", "The task: instruction, SOP, records for {} synthetic clients ({} in the review queue), solution and verifier".format(
+                self._overview["clients"], self._overview["queue"]),
              "done" if oracle_ok else "failed", "the oracle scores 1 and an empty run scores 0 in the checks above"),
             ("design", "Design notes and diagrams", "done" if diagrams else "pending",
-             ", ".join(diagrams) if diagrams else "diagrams not found next to the task"),
+             ", ".join(diagrams) if diagrams else "diagrams not found in docs/"),
             ("static_checks", "Terminal-Bench 3 static checks", "pending", "run in Phase 3"),
             ("rubric", "Implementation rubric review", "pending", "run in Phase 3"),
             ("harbor", "Docker build, oracle scores 1 and nop scores 0 in Harbor", "pending", "run in Phase 3"),
@@ -791,18 +788,17 @@ class Task:
                 o = {}
             given = o.get("status", status)
             out.append({"id": key, "label": label,
-                        "status": given if given in ("done", "pending", "waiting", "failed") else status,
+                        "status": given if given in ("done", "pending", "waiting", "failed", "not met") else status,
                         "detail": str(o.get("detail", detail))})
         return out
 
     def status(self):
         results = self._results()
         return {"checks": self._checks, "requirements": self.requirements(results),
-                "trials": (results or {}).get("trials", []), "results_error": (results or {}).get("error"),
-                "results_path": str(self.results_path) if self.results_path else None}
+                "trials": (results or {}).get("trials", []), "results_error": (results or {}).get("error")}
 
     def state(self):
         return {"overview": self._overview, "clients": self.summaries(),
-                "mistakes": [{"id": m["id"], "label": m["label"], "client": m["client"]} for m in self.traps["mistakes"]],
+                "mistakes": [{"id": m["id"], "label": m["label"]} for m in self.traps["mistakes"]],
                 "task_dir": _display_path(self.dir)}
 

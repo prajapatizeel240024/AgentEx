@@ -62,9 +62,30 @@ def planned_trips(c):
 
 
 def carrier_docs(c):
+    """SOP 4.3(b): (departure or None, return). Only a leg that leaves or enters the United States
+    sets a date, so a document with no leg out of the US gives no departure date."""
     docs = [(d(x["depart_date"]), d(x["return_date"])) for x in c["documents"] if x["doc_type"] in CARRIER_TYPES]
-    docs += [(d(f["depart"]), d(f["return"])) for f in email_facts(c, "carrier_doc")]
+    docs += [(d(f["depart"]) if f["depart"] else None, d(f["return"])) for f in email_facts(c, "carrier_doc")]
     return docs
+
+
+def cbp_record(c):
+    """SOP 2 and 4.3(a): the coverage windows and the CBP records, in the order the crossings happened.
+
+    A CBP response the client sends us counts like ours: its period joins the coverage window, and a
+    record that both responses list counts once. Records with the same date keep their order in the
+    response (it lists the crossings in the order they happened), so the sort is by date only."""
+    foia = c["cbp_foia"]
+    windows = [(d(foia["coverage_from"]), d(foia["coverage_to"]))]
+    events = list(c["cbp_events"])
+    seen = {(e["date"], e["type"]) for e in events}
+    for f in email_facts(c, "client_foia"):
+        windows.append((d(f["coverage_from"]), d(f["coverage_to"])))
+        for e in f["events"]:
+            if (e["date"], e["type"]) not in seen:
+                seen.add((e["date"], e["type"]))
+                events.append(e)
+    return windows, sorted(events, key=lambda e: e["date"])
 
 
 def statements(c):
@@ -81,14 +102,13 @@ def assemble_trips(c):
     """SOP 4.3-4.6. Returns ((depart or None, return, verified) tuples, open departure or None).
 
     The open departure is a CBP departure with no later arrival: the client is still abroad."""
-    foia = c["cbp_foia"]
-    lo, hi = d(foia["coverage_from"]), d(foia["coverage_to"])
+    windows, events = cbp_record(c)
 
     def inside(r):
-        return lo <= r <= hi
+        return any(lo <= r <= hi for lo, hi in windows)
 
     docs, stmts = carrier_docs(c), statements(c)
-    events = sorted(c["cbp_events"], key=lambda e: (e["date"], 0 if e["type"] == "DEPARTURE" else 1))
+    dated_docs = [x for x in docs if x[0] is not None]
     trips, pending = [], None
     for e in events:
         if e["type"] == "DEPARTURE":
@@ -98,7 +118,7 @@ def assemble_trips(c):
         if pending is not None:
             trips.append((pending, ret, True))
         else:
-            doc = next((x for x in docs if near(x[1], ret)), None)
+            doc = next((x for x in dated_docs if near(x[1], ret)), None)
             st = next((x for x in stmts if near(x[1], ret)), None)
             if doc:
                 trips.append((doc[0], ret, True))
@@ -107,7 +127,7 @@ def assemble_trips(c):
             else:
                 trips.append((None, ret, False))
         pending = None
-    outside_docs = [x for x in docs if not inside(x[1])]
+    outside_docs = [x for x in dated_docs if not inside(x[1])]
     trips += [(x[0], x[1], True) for x in outside_docs]
     for st in stmts:
         if inside(st[1]) or any(near(x[1], st[1]) for x in outside_docs):

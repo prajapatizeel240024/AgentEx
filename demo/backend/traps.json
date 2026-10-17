@@ -380,6 +380,74 @@
           "why": "deciding every client in the CMS instead of the review queue"
         }
       ]
+    },
+    "C-1033": {
+      "title": "Two crossings on one day: back from London, out to Toronto",
+      "story": "CBP lists two crossings on 04/10/2025: in the response, which lists crossings in the order they happened, newest first, the exit sits above the entry. So he came back from London that morning and left for Toronto that evening: two absences (2025-01-06 to 04-10 and 04-10 to 07-31), neither over six months. His email and questionnaire call it one assignment, and his e-ticket covers only the Toronto leg. His many work trips leave him short of 913 days present until 2026-05-01.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "putting the exit before the entry on a shared date, which drops the London leg"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2030-01-31",
+          "why": "taking the 2025 stint as one trip, as the client describes it (more than six months)"
+        }
+      ]
+    },
+    "C-1034": {
+      "title": "The client's own CBP response",
+      "story": "The firm's FOIA response is from a 2024 consultation and ends on 2024-06-15. He emailed CBP's answer to his own request, which covers 2024-01-01 to 2026-02-06. It counts like ours (SOP 2): its period joins the coverage window and the records both list count once. The Montreal itinerary in the CMS (2025-01-15 to 2025-08-20) then returns inside the window with no CBP arrival near it, so it is disregarded: CBP shows he came back on 2025-03-02. He can file today.",
+      "wrong": [
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "ignoring the response he sent, so his 2024 trip rests on his questionnaire"
+        },
+        {
+          "answer": "SCHEDULE, 5-year, 2030-02-20",
+          "why": "typing his CBP trips in as trips but keeping only the firm's window, so the stale itinerary counts as a seven-month absence"
+        }
+      ]
+    },
+    "C-1035": {
+      "title": "An itinerary that starts in Toronto",
+      "story": "CBP recorded his flight back into Newark on 2022-08-14 but no departure: he went to Toronto by land. His itinerary flies Toronto to Lisbon and Lisbon to Newark. Only a leg that leaves or enters the United States sets a date (SOP 4.3), so it proves the return but not the US departure. The departure rests on his questionnaire, the trip is unverified and recent, and the firm needs more evidence.",
+      "wrong": [
+        {
+          "answer": "FILE_NOW",
+          "why": "taking the Toronto flight's date as the US departure"
+        }
+      ]
+    },
+    "C-1036": {
+      "title": "A day trip by ferry",
+      "story": "CBP lists an exit and an entry at the Seattle ferry pier on 08/17/2024; in the response the entry sits above the exit, so he left and came back the same day (the Victoria ferry). A same-day trip has no days abroad. Everything else is met and he can file today.",
+      "wrong": [
+        {
+          "answer": "REQUEST_EVIDENCE",
+          "why": "putting the entry before the exit on a shared date, which leaves an arrival with no departure"
+        }
+      ]
+    },
+    "C-1037": {
+      "title": "A domestic flight the day before",
+      "story": "Her London itinerary starts with Boston to New York on 2022-01-30 and leaves the United States on 2022-01-31; she flew back on 2022-07-31. Only the leg that leaves the United States sets the departure (SOP 4.3), so the absence is exactly six calendar months, not more: no break, and she can file today. The trip is before her CBP coverage, so the itinerary is the evidence.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2027-01-31",
+          "why": "taking the Boston to New York flight as the departure, which makes it more than six months"
+        }
+      ]
+    },
+    "C-1038": {
+      "title": "Home through Seattle",
+      "story": "He flew to Tokyo on 2022-03-15 and back into Seattle on 2023-03-14, then on to New York the next day. He arrived in the United States on 2023-03-14 (SOP 4.3), so the absence is less than a year. It is more than six months, but an employment letter and a lease both cover it, so the presumption is rebutted: no break, and he can file today.",
+      "wrong": [
+        {
+          "answer": "SCHEDULE, 5-year, 2027-03-16",
+          "why": "taking the domestic connection's date as the return, which makes it one year"
+        }
+      ]
     }
   },
   "mistakes": [
@@ -481,6 +549,66 @@
         "status": "SCHEDULE",
         "basis": "5_YEAR",
         "earliest_filing_date": "2026-04-20"
+      }
+    },
+    {
+      "id": "sameday-exit-first",
+      "label": "C-1033: exit put before entry on a shared date",
+      "client": "C-1033",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "client-foia",
+      "label": "C-1034: the client's own CBP response ignored",
+      "client": "C-1034",
+      "set": {
+        "status": "REQUEST_EVIDENCE",
+        "basis": null,
+        "earliest_filing_date": null
+      }
+    },
+    {
+      "id": "toronto-start",
+      "label": "C-1035: the Toronto flight taken as the US departure",
+      "client": "C-1035",
+      "set": {
+        "status": "FILE_NOW",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "sameday-entry-first",
+      "label": "C-1036: entry put before exit on a shared date",
+      "client": "C-1036",
+      "set": {
+        "status": "REQUEST_EVIDENCE",
+        "basis": null,
+        "earliest_filing_date": null
+      }
+    },
+    {
+      "id": "domestic-first-leg",
+      "label": "C-1037: the domestic first leg taken as the departure",
+      "client": "C-1037",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2027-01-31"
+      }
+    },
+    {
+      "id": "domestic-connection",
+      "label": "C-1038: the domestic connection taken as the return",
+      "client": "C-1038",
+      "set": {
+        "status": "SCHEDULE",
+        "basis": "5_YEAR",
+        "earliest_filing_date": "2027-03-16"
       }
     },
     {

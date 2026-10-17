@@ -3210,6 +3210,1218 @@
           "oath_date": "2023-02-20"
         }
       ]
+    },
+    {
+      "client_id": "C-1033",
+      "full_name": "Rohan Kapoor",
+      "dob": "1981-03-09",
+      "a_number": "A213774520",
+      "email": "rohan.kapoor@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2018-10-01",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2018-10-01",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "77 Hudson St, Apt 2104",
+          "city": "Jersey City",
+          "state": "NJ",
+          "moved_in": "2015-09-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01033",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2021-03-22",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-06-18",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-09-13",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-12-10",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-02-14",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-05-13",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-09-12",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-12-09",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-02-13",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-05-12",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-09-11",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-12-08",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-03-11",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-06-07",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-09-09",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-11-22",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-01-06",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-04-10",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-04-10",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-07-31",
+          "type": "ARRIVAL",
+          "port": "Toronto Pearson (YYZ) preclearance, ON",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-10-06",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-12-12",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2021-03-22",
+          "return_date": "2021-06-18",
+          "destination": "United Kingdom (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2021-09-13",
+          "return_date": "2021-12-10",
+          "destination": "Germany (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2022-02-14",
+          "return_date": "2022-05-13",
+          "destination": "United Kingdom (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2022-09-12",
+          "return_date": "2022-12-09",
+          "destination": "Netherlands (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2023-02-13",
+          "return_date": "2023-05-12",
+          "destination": "United Kingdom (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2023-09-11",
+          "return_date": "2023-12-08",
+          "destination": "Germany (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2024-03-11",
+          "return_date": "2024-06-07",
+          "destination": "United Kingdom (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2024-09-09",
+          "return_date": "2024-11-22",
+          "destination": "Ireland (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2025-01-06",
+          "return_date": "2025-07-31",
+          "destination": "United Kingdom, Canada (work assignment)",
+          "answered_on": "2026-01-08"
+        },
+        {
+          "depart_date": "2025-10-06",
+          "return_date": "2025-12-12",
+          "destination": "Germany (work assignment)",
+          "answered_on": "2026-01-08"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-01-21_rohan-kapoor.eml",
+          "date": "2026-01-21T08:47:00-05:00",
+          "from": "Rohan Kapoor <rohan.kapoor@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Toronto e-ticket",
+          "body": "Hi,\n\nYou asked for my travel documents. Attached is the e-ticket for my Toronto assignment last year. I was away on assignment for most of 2025: London first, then our Toronto office until the end of July.\n\nBest,\nRohan\n",
+          "attachments": [
+            {
+              "filename": "skyline_eticket_TQ8M2P.pdf",
+              "content_type": "application/pdf",
+              "pdf": "itinerary",
+              "carrier": "NORTHERN SKYLINE AIRWAYS",
+              "booking": "TQ8M2P",
+              "passenger": "KAPOOR/ROHAN MR",
+              "date_format": "MM/DD/YYYY",
+              "subtitle": "E-ticket itinerary",
+              "note": "Flights from Toronto clear US border preclearance at Toronto Pearson before departure.",
+              "flights": [
+                {
+                  "flight": "NS 711",
+                  "date": "2025-04-10",
+                  "from": "Newark (EWR), USA",
+                  "to": "Toronto (YYZ), Canada",
+                  "dep": "18:45",
+                  "arr": "20:20"
+                },
+                {
+                  "flight": "NS 718",
+                  "date": "2025-07-31",
+                  "from": "Toronto (YYZ), Canada",
+                  "to": "Newark (EWR), USA",
+                  "dep": "07:10",
+                  "arr": "08:50"
+                }
+              ]
+            }
+          ],
+          "facts": {
+            "kind": "carrier_doc",
+            "doc_type": "AIRLINE_ITINERARY",
+            "depart": "2025-04-10",
+            "return": "2025-07-31"
+          }
+        }
+      ],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2025-12-01",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "client_id": "C-1034",
+      "full_name": "Julien Tremblay",
+      "dob": "1987-10-22",
+      "a_number": "A215093318",
+      "email": "julien.tremblay@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-02-11",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-02-11",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "245 Prospect Park W, Apt 3",
+          "city": "Brooklyn",
+          "state": "NY",
+          "moved_in": "2017-06-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2024-04417",
+        "coverage_from": "2019-07-01",
+        "coverage_to": "2024-06-15",
+        "received_on": "2024-08-20"
+      },
+      "cbp_events": [
+        {
+          "date": "2019-08-15",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2019-08-25",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-05-13",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-05-24",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-09-02",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-09-13",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2021-12-17",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-01-03",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-04-14",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-04-25",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-07-28",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-08-08",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2022-12-21",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-01-03",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-04-06",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-04-17",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-08-03",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-08-14",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-12-20",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-01-03",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-03-28",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-04-08",
+          "type": "ARRIVAL",
+          "port": "Montreal-Trudeau (YUL) preclearance, QC",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1034-1",
+          "doc_type": "AIRLINE_ITINERARY",
+          "issuer": "Laurentian Air (JFK-YUL)",
+          "depart_date": "2025-01-15",
+          "return_date": "2025-08-20",
+          "covers_from": null,
+          "covers_to": null,
+          "received_on": "2025-01-10"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2021-05-13",
+          "return_date": "2021-05-24",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2021-09-02",
+          "return_date": "2021-09-13",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2021-12-17",
+          "return_date": "2022-01-03",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2022-04-14",
+          "return_date": "2022-04-25",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2022-07-28",
+          "return_date": "2022-08-08",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2022-12-21",
+          "return_date": "2023-01-03",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2023-04-06",
+          "return_date": "2023-04-17",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2023-08-03",
+          "return_date": "2023-08-14",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2023-12-20",
+          "return_date": "2024-01-03",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2024-03-28",
+          "return_date": "2024-04-08",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        },
+        {
+          "depart_date": "2024-06-24",
+          "return_date": "2024-07-19",
+          "destination": "Canada (Montreal)",
+          "answered_on": "2024-07-25"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-12_julien-tremblay.eml",
+          "date": "2026-02-12T18:22:00-05:00",
+          "from": "Julien Tremblay <julien.tremblay@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "My CBP travel record",
+          "body": "Hi,\n\nAs you suggested, I asked CBP for my own travel record so you have my recent trips. Their answer came this week and is attached.\n\nThanks,\nJulien\n",
+          "attachments": [
+            {
+              "filename": "CBP-2026-08861.pdf",
+              "content_type": "application/pdf",
+              "pdf": "foia",
+              "traveler": "Julien Tremblay",
+              "dob": "1987-10-22",
+              "addressee": [
+                "Julien Tremblay",
+                "245 Prospect Park W, Apt 3",
+                "Brooklyn, NY 11215"
+              ]
+            }
+          ],
+          "facts": {
+            "kind": "client_foia",
+            "request_no": "CBP-2026-08861",
+            "coverage_from": "2024-01-01",
+            "coverage_to": "2026-02-06",
+            "received_on": "2026-02-09",
+            "events": [
+              {
+                "date": "2024-01-03",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-03-28",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-04-08",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-06-24",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-07-19",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-10-10",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-10-21",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2024-12-19",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-01-05",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-01-15",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-03-02",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-07-03",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-07-14",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-10-09",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-10-20",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              },
+              {
+                "date": "2025-12-18",
+                "type": "DEPARTURE",
+                "port": "JFK",
+                "mode": "AIR"
+              },
+              {
+                "date": "2026-01-04",
+                "type": "ARRIVAL",
+                "port": "Montreal-Trudeau (YUL) preclearance, QC",
+                "mode": "AIR"
+              }
+            ]
+          }
+        }
+      ],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2024-07-10",
+          "closed_on": "2024-10-01",
+          "outcome": "Consultation only; client chose to wait. Case closed."
+        },
+        {
+          "matter_type": "Travel advice",
+          "opened_on": "2025-01-08",
+          "closed_on": "2025-01-20",
+          "outcome": "Advised on a planned seven-month stay in Montreal."
+        },
+        {
+          "matter_type": "N-400",
+          "opened_on": "2026-01-15",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "client_id": "C-1035",
+      "full_name": "Rui Carvalho",
+      "dob": "1984-09-03",
+      "a_number": "A208815563",
+      "email": "rui.carvalho@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-05-14",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-05-14",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "61 Ferry St, Apt 2",
+          "city": "Newark",
+          "state": "NJ",
+          "moved_in": "2014-08-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01035",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2022-08-14",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-12-20",
+          "type": "DEPARTURE",
+          "port": "EWR",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-01-04",
+          "type": "ARRIVAL",
+          "port": "EWR",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-07-23",
+          "return_date": "2022-08-14",
+          "destination": "Portugal",
+          "answered_on": "2025-11-20"
+        },
+        {
+          "depart_date": "2024-12-20",
+          "return_date": "2025-01-04",
+          "destination": "Portugal",
+          "answered_on": "2025-11-20"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-06_rui-carvalho.eml",
+          "date": "2026-02-06T10:12:00-05:00",
+          "from": "Rui Carvalho <rui.carvalho@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Portugal trip 2022",
+          "body": "Hello,\n\nYou asked for proof of the dates of my trip to Portugal in the summer of 2022. My airline itinerary is attached.\n\nRui\n",
+          "attachments": [
+            {
+              "filename": "tagus_itinerary_TG3R8M.pdf",
+              "content_type": "application/pdf",
+              "pdf": "itinerary",
+              "carrier": "TAGUS AIR",
+              "booking": "TG3R8M",
+              "passenger": "CARVALHO/RUI MR",
+              "date_format": "MM/DD/YYYY",
+              "subtitle": "E-ticket itinerary",
+              "note": "Checked baggage: 1 x 23 kg.",
+              "flights": [
+                {
+                  "flight": "TG 361",
+                  "date": "2022-07-23",
+                  "from": "Toronto (YYZ), Canada",
+                  "to": "Lisbon (LIS), Portugal",
+                  "dep": "21:40",
+                  "arr": "09:55+1"
+                },
+                {
+                  "flight": "TG 205",
+                  "date": "2022-08-14",
+                  "from": "Lisbon (LIS), Portugal",
+                  "to": "Newark (EWR), USA",
+                  "dep": "11:20",
+                  "arr": "14:05"
+                }
+              ]
+            }
+          ],
+          "facts": {
+            "kind": "carrier_doc",
+            "doc_type": "AIRLINE_ITINERARY",
+            "depart": null,
+            "return": "2022-08-14"
+          }
+        }
+      ],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2025-11-14",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "client_id": "C-1036",
+      "full_name": "Mateo Alvarez",
+      "dob": "1990-05-12",
+      "a_number": "A216402981",
+      "email": "mateo.alvarez@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-06-03",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-06-03",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "1420 NW 56th St, Apt 5",
+          "city": "Seattle",
+          "state": "WA",
+          "moved_in": "2017-03-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01036",
+        "coverage_from": "2021-01-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-05-02",
+          "type": "DEPARTURE",
+          "port": "Seattle (SEA), WA",
+          "mode": "AIR"
+        },
+        {
+          "date": "2023-05-20",
+          "type": "ARRIVAL",
+          "port": "Seattle (SEA), WA",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-08-17",
+          "type": "DEPARTURE",
+          "port": "Seattle, WA (Pier 69)",
+          "mode": "SEA"
+        },
+        {
+          "date": "2024-08-17",
+          "type": "ARRIVAL",
+          "port": "Seattle, WA (Pier 69)",
+          "mode": "SEA"
+        },
+        {
+          "date": "2025-02-10",
+          "type": "DEPARTURE",
+          "port": "Seattle (SEA), WA",
+          "mode": "AIR"
+        },
+        {
+          "date": "2025-02-24",
+          "type": "ARRIVAL",
+          "port": "Seattle (SEA), WA",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2023-05-02",
+          "return_date": "2023-05-20",
+          "destination": "Mexico",
+          "answered_on": "2025-12-02"
+        },
+        {
+          "depart_date": "2025-02-10",
+          "return_date": "2025-02-24",
+          "destination": "Colombia",
+          "answered_on": "2025-12-02"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2025-11-25",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "client_id": "C-1037",
+      "full_name": "Siobhan Byrne",
+      "dob": "1984-11-02",
+      "a_number": "A210774659",
+      "email": "siobhan.byrne@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2019-01-14",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2019-01-14",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "212 Beacon St, Apt 6",
+          "city": "Boston",
+          "state": "MA",
+          "moved_in": "2016-08-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01037",
+        "coverage_from": "2022-10-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2023-12-20",
+          "type": "DEPARTURE",
+          "port": "Boston (BOS), MA",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-01-05",
+          "type": "ARRIVAL",
+          "port": "Boston (BOS), MA",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-01-30",
+          "return_date": "2022-07-31",
+          "destination": "United Kingdom (London)",
+          "answered_on": "2025-12-10"
+        },
+        {
+          "depart_date": "2023-12-20",
+          "return_date": "2024-01-05",
+          "destination": "Ireland",
+          "answered_on": "2025-12-10"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-04_siobhan-byrne.eml",
+          "date": "2026-02-04T13:30:00-05:00",
+          "from": "Siobhan Byrne <siobhan.byrne@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "London 2022",
+          "body": "Hi,\n\nHere is the itinerary for my stay in London in 2022, as you asked.\n\nSiobhan\n",
+          "attachments": [
+            {
+              "filename": "meridian_itinerary_MX7P2D.pdf",
+              "content_type": "application/pdf",
+              "pdf": "itinerary",
+              "carrier": "MERIDIAN ATLANTIC AIRWAYS",
+              "booking": "MX7P2D",
+              "passenger": "BYRNE/SIOBHAN MS",
+              "date_format": "MM/DD/YYYY",
+              "subtitle": "E-ticket itinerary",
+              "note": "Checked baggage: 2 x 23 kg.",
+              "flights": [
+                {
+                  "flight": "MA 1102",
+                  "date": "2022-01-30",
+                  "from": "Boston (BOS), USA",
+                  "to": "New York (JFK), USA",
+                  "dep": "18:05",
+                  "arr": "19:25"
+                },
+                {
+                  "flight": "MA 7",
+                  "date": "2022-01-31",
+                  "from": "New York (JFK), USA",
+                  "to": "London (LHR), United Kingdom",
+                  "dep": "09:00",
+                  "arr": "21:05"
+                },
+                {
+                  "flight": "MA 8",
+                  "date": "2022-07-31",
+                  "from": "London (LHR), United Kingdom",
+                  "to": "Boston (BOS), USA",
+                  "dep": "11:30",
+                  "arr": "14:10"
+                }
+              ]
+            }
+          ],
+          "facts": {
+            "kind": "carrier_doc",
+            "doc_type": "AIRLINE_ITINERARY",
+            "depart": "2022-01-31",
+            "return": "2022-07-31"
+          }
+        }
+      ],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2025-12-03",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "client_id": "C-1038",
+      "full_name": "Kenta Ishikawa",
+      "dob": "1980-08-21",
+      "a_number": "A209915376",
+      "email": "kenta.ishikawa@example.com",
+      "in_queue": true,
+      "lpr_records": [
+        {
+          "source": "I551_CARD_SCAN",
+          "form": null,
+          "record_date": "2017-11-06",
+          "note": "Resident Since, front of card"
+        },
+        {
+          "source": "QUESTIONNAIRE",
+          "form": null,
+          "record_date": "2017-11-06",
+          "note": "Client-entered date of becoming a permanent resident"
+        }
+      ],
+      "addresses": [
+        {
+          "street": "41-22 Judge St, Apt 3B",
+          "city": "Elmhurst",
+          "state": "NY",
+          "moved_in": "2014-05-01",
+          "moved_out": null
+        }
+      ],
+      "marriage": null,
+      "cbp_foia": {
+        "request_no": "CBP-2026-01038",
+        "coverage_from": "2023-06-01",
+        "coverage_to": "2026-02-15",
+        "received_on": "2026-02-15"
+      },
+      "cbp_events": [
+        {
+          "date": "2024-11-20",
+          "type": "DEPARTURE",
+          "port": "JFK",
+          "mode": "AIR"
+        },
+        {
+          "date": "2024-12-02",
+          "type": "ARRIVAL",
+          "port": "JFK",
+          "mode": "AIR"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "DOC-1038-1",
+          "doc_type": "US_EMPLOYMENT_LETTER",
+          "issuer": "Hudson Lane Securities, New York NY",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2021-09-01",
+          "covers_to": "2023-06-30",
+          "received_on": "2025-12-15"
+        },
+        {
+          "doc_id": "DOC-1038-2",
+          "doc_type": "US_LEASE_OR_DEED",
+          "issuer": "Lease, 41-22 Judge St Apt 3B",
+          "depart_date": null,
+          "return_date": null,
+          "covers_from": "2020-07-01",
+          "covers_to": "2025-06-30",
+          "received_on": "2025-12-15"
+        }
+      ],
+      "questionnaire_trips": [
+        {
+          "depart_date": "2022-03-15",
+          "return_date": "2023-03-15",
+          "destination": "Japan (work assignment)",
+          "answered_on": "2025-12-12"
+        },
+        {
+          "depart_date": "2024-11-20",
+          "return_date": "2024-12-02",
+          "destination": "Japan",
+          "answered_on": "2025-12-12"
+        }
+      ],
+      "planned_travel": [],
+      "emails": [
+        {
+          "file": "2026-02-02_kenta-ishikawa.eml",
+          "date": "2026-02-02T21:15:00-05:00",
+          "from": "Kenta Ishikawa <kenta.ishikawa@example.com>",
+          "to": "intake@calder-voss.example",
+          "subject": "Tokyo assignment flights",
+          "body": "Hello,\n\nAttached are my flights for the Tokyo assignment (March 2022 to March 2023).\n\nKenta Ishikawa\n",
+          "attachments": [
+            {
+              "filename": "pacific_crane_PC5K9W.pdf",
+              "content_type": "application/pdf",
+              "pdf": "itinerary",
+              "carrier": "PACIFIC CRANE AIRLINES",
+              "booking": "PC5K9W",
+              "passenger": "ISHIKAWA/KENTA MR",
+              "date_format": "MM/DD/YYYY",
+              "subtitle": "E-ticket itinerary",
+              "note": "Checked baggage: 2 x 23 kg.",
+              "flights": [
+                {
+                  "flight": "PC 9",
+                  "date": "2022-03-15",
+                  "from": "New York (JFK), USA",
+                  "to": "Tokyo (NRT), Japan",
+                  "dep": "12:30",
+                  "arr": "15:40+1"
+                },
+                {
+                  "flight": "PC 12",
+                  "date": "2023-03-14",
+                  "from": "Tokyo (NRT), Japan",
+                  "to": "Seattle (SEA), USA",
+                  "dep": "17:05",
+                  "arr": "09:45"
+                },
+                {
+                  "flight": "PC 1120",
+                  "date": "2023-03-15",
+                  "from": "Seattle (SEA), USA",
+                  "to": "New York (JFK), USA",
+                  "dep": "07:00",
+                  "arr": "15:25"
+                }
+              ]
+            }
+          ],
+          "facts": {
+            "kind": "carrier_doc",
+            "doc_type": "AIRLINE_ITINERARY",
+            "depart": "2022-03-15",
+            "return": "2023-03-14"
+          }
+        }
+      ],
+      "matters": [
+        {
+          "matter_type": "N-400",
+          "opened_on": "2025-12-08",
+          "closed_on": null,
+          "outcome": null
+        }
+      ]
     }
   ]
 }

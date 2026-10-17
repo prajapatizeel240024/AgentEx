@@ -12,10 +12,6 @@ const STATUS = {
   REQUEST_EVIDENCE: { word: "REQUEST EVIDENCE", color: "red", plain: "needs more evidence first" },
 };
 const BASIS = { "5_YEAR": "5-year basis", "3_YEAR_MARRIAGE": "3-year basis, spouse of a US citizen" };
-const TAGS = {
-  used: "used", "never used": "never used", "not needed": "not needed", ignored: "ignored", verified: "verified",
-  unverified: "unverified", planned: "planned", break: "break", rebutted: "rebutted", info: "",
-};
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const esc = (v) => String(v === null || v === undefined ? "" : v).replace(/[&<>"']/g,
@@ -39,8 +35,8 @@ function decHTML(d) {  // like decText, but the date never breaks across lines
     .filter(Boolean).join(", ");
 }
 
-function stamp(dec, size, extra) {
-  const cls = "stamp stamp-" + (size || "lg") + (extra ? " " + extra : "");
+function stamp(dec, size) {
+  const cls = "stamp stamp-" + size;
   if (!dec) {
     return `<div class="${cls}" role="img" aria-label="Not in the review queue"><span class="s-main">NOT IN QUEUE</span><span class="s-basis">no decision allowed</span></div>`;
   }
@@ -184,7 +180,7 @@ function renderClientsShell() {
     </div>`;
 }
 
-function timelineSVG(tl, status, width) {
+function timelineSVG(tl, width) {
   // Drawn at the container's real width so the 13px text stays 13px on every screen.
   const W = Math.max(300, Math.round(width || 900)), PAD = 12, H = 150, CH = 7.2;
   const day = (s) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)) / 864e5;
@@ -228,7 +224,7 @@ function timelineSVG(tl, status, width) {
       out += `<rect x="${from}" y="70" width="${w}" height="20" rx="3" fill="var(--ink)"/>`;
     }
   }
-  const colors = { review: "var(--ink)", lpr: "var(--ink-2)", filing: status === "FILE_NOW" ? "var(--green)" : "var(--blue)" };
+  const colors = { review: "var(--ink)", lpr: "var(--ink-2)", filing: "var(--blue)" };
   const rows = [[], [], []];
   const markers = tl.markers.slice().sort((a, b) => a.date.localeCompare(b.date));
   const labels = [];
@@ -271,8 +267,8 @@ function renderBases(bases) {
 
 function renderStep(s, i) {
   const lines = s.lines.length ? `<ul class="lines">${s.lines.map((l) => `
-      <li class="t-${esc(l.tag.replace(/ /g, "-").replace("never-used", "never"))}${l.sub ? " sub" : ""}">
-        <span class="tag">${esc(TAGS[l.tag] !== undefined ? TAGS[l.tag] : l.tag)}</span><span>${esc(l.text)}</span>
+      <li class="t-${esc(l.tag.replace(/ /g, "-"))}${l.sub ? " sub" : ""}">
+        <span class="tag">${esc(l.tag === "info" ? "" : l.tag)}</span><span>${esc(l.text)}</span>
       </li>`).join("")}</ul>` : "";
   return `
     <li class="step st-${esc(s.status)}">
@@ -344,7 +340,7 @@ function renderDetail(d) {
       <p class="story">${esc(trap.story)}</p>
       ${wrong}
     </section>
-    ${d.timeline ? `<section><h2>Timeline</h2><div id="tl">${timelineSVG(d.timeline, d.expected && d.expected.status, timelineWidth())}</div>${legend}</section>` : ""}
+    ${d.timeline ? `<section><h2>Timeline</h2><div id="tl">${timelineSVG(d.timeline, timelineWidth())}</div>${legend}</section>` : ""}
     ${d.steps ? `<section><h2>How the SOP gets there</h2><ol class="steps">${d.steps.map(renderStep).join("")}</ol></section>` : ""}
     <section><h2>Records the agent sees</h2>${renderRecords(d)}</section>`;
 }
@@ -371,7 +367,7 @@ window.addEventListener("resize", () => {
   resizeTimer = setTimeout(() => {
     const tl = document.getElementById("tl");
     const d = S.details[S.client];
-    if (tl && d && d.timeline) tl.innerHTML = timelineSVG(d.timeline, d.expected && d.expected.status, timelineWidth());
+    if (tl && d && d.timeline) tl.innerHTML = timelineSVG(d.timeline, timelineWidth());
   }, 150);
 });
 
@@ -453,7 +449,7 @@ async function renderDone(root) {
   const checks = st.checks.map((c) => `
     <li><span class="pill ${c.ok ? "pass" : "fail"}">${c.ok ? "pass" : "fail"}</span><span class="what">${esc(c.name)}</span>${c.detail ? `<span class="detail">${esc(c.detail)}</span>` : ""}</li>`).join("");
   const reqs = st.requirements.map((r) => `
-    <li><span class="pill ${esc(r.status)}">${esc(r.status)}</span><span class="what">${esc(r.label)}</span>${r.detail ? `<span class="detail">${esc(r.detail)}</span>` : ""}</li>`).join("");
+    <li><span class="pill ${esc(r.status.replace(/ /g, "-"))}">${esc(r.status)}</span><span class="what">${esc(r.label)}</span>${r.detail ? `<span class="detail">${esc(r.detail)}</span>` : ""}</li>`).join("");
   const missed = (list) => (list && list.length ? list.map((cid) => `<a href="#/clients/${esc(cid)}">${esc(cid)}</a>`).join(", ") : "none");
   const trials = st.trials.length ? `
     <table class="trials">
@@ -461,7 +457,7 @@ async function renderDone(root) {
       <tbody>${st.trials.map((t) => `<tr><td>${esc(t.kind || "")} ${esc(t.trial || "")}</td><td>${esc(t.agent || "")}<br><span class="muted small">${esc(t.model || "")}${t.effort ? ", " + esc(t.effort) : ""}</span></td>
         <td><strong>${esc(t.reward)}</strong></td><td>${missed(t.missed)}</td><td>${esc(t.note || "")}</td></tr>`).join("")}</tbody>
     </table>`
-    : `<p class="muted">No trial results yet. After the runs, put a summary at <code>results/summary.json</code> next to the task (the format is in <code>demo/README.md</code>) and reload this page.</p>`;
+    : `<p class="muted">No trial results yet. After the runs, put a summary at <code>demo/results.json</code> (the format is in <code>demo/README.md</code>) and restart the explorer.</p>`;
   root.innerHTML = `
     <div class="hero">
       <h1>What's done</h1>
