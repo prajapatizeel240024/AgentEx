@@ -97,7 +97,7 @@ function renderTask() {
     .replace(/\n {2}\]\n\}$/, ",\n    …\n  ]\n}");
   const diagram = o.diagrams.includes("how-it-works.svg") ? `
     <figure class="diagram">
-      <img src="/docs/how-it-works.svg" alt="How the task works: the ground truth is rendered into the records the agent reads; the agent writes 15 decisions; a separate verifier recomputes the answers and gives reward 1 only if all 15 match.">
+      <img src="/docs/how-it-works.svg" alt="How the task works: the ground truth is rendered into the records the agent reads; the agent writes ${o.queue} decisions; a separate verifier recomputes the answers and gives reward 1 only if all ${o.queue} match.">
       <figcaption>How the pieces fit: the agent never sees the answer key, and the verifier never runs the agent's code.</figcaption>
     </figure>` : "";
   return `

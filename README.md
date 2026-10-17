@@ -39,6 +39,7 @@ Every check that was run passes except one: the assignment's bar that all 3 stan
 - [How to run everything](#how-to-run-everything)
 - [Repository layout](#repository-layout)
 - [Design notes](#design-notes)
+- [Known issues](#known-issues)
 - [Iteration log](#iteration-log)
 
 ## What the agent gets and what it must write
@@ -243,6 +244,10 @@ docs/                           3 diagrams and 6 explorer screenshots
 [docs/DESIGN.md](docs/DESIGN.md) covers how the task handles human review, guardrails, data management, speed and cost, and bounded agent loops, plus the sources behind every rule and a plan for turning it into a production tool:
 
 ![Production plan](docs/production-plan.svg)
+
+## Known issues
+
+- **A date in a replaced CBP response.** `/app/review/foia/CBP-2026-01028.pdf`, CBP's first response for C-1028, is dated February 2, 2026, but says CBP searched records through February 15, 2026, 13 days later. `tests/case_facts.json` gives that response its own date and records but no search window of its own, so the renderer prints the request's window on both of C-1028's responses. No answer depends on it: only the latest response to a request counts (SOP section 2), and the amended response, `CBP-2026-01028-A1.pdf` (February 20, 2026), gives the same window. Fixing it would change the task data and mean rerunning every check and trial, so it is left as is.
 
 ## Iteration log
 
